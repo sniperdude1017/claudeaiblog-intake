@@ -26,6 +26,7 @@ const PUBLIC_PATHS = new Set([
   "/index.html",
   "/consumer-ca.html",
   "/consumer-ga.html",
+  "/privacy.html",
   "/app.js",
   "/styles.css",
   "/healthz",
