@@ -8,67 +8,66 @@
   </head>
   <body>
     <main class="shell">
-      <header class="brand">
-        <div class="logo-mark" aria-hidden="true">
-          <svg class="logo-svg" viewBox="0 0 120 120" role="presentation">
-            <defs>
-              <linearGradient id="clawGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ff5f56" />
-                <stop offset="100%" stop-color="#b11212" />
-              </linearGradient>
-            </defs>
-            <circle cx="60" cy="60" r="52" fill="url(#clawGradient)" opacity="0.92" />
-            <path
-              d="M32 34 C24 44 26 60 42 62 C28 62 22 76 30 86 C36 94 56 92 60 78 C64 92 84 94 90 86 C98 76 92 62 78 62 C94 60 96 44 88 34 C82 26 70 26 60 34 C50 26 38 26 32 34Z"
-              fill="#0b090a"
-              opacity="0.28"
-            />
-            <path
-              d="M24 30 L44 36 C40 28 36 22 30 20 Z"
-              fill="#ff5f56"
-              opacity="0.9"
-            />
-            <path
-              d="M96 30 L76 36 C80 28 84 22 90 20 Z"
-              fill="#ff5f56"
-              opacity="0.9"
-            />
-            <circle cx="46" cy="55" r="8" fill="#0b0b0b" />
-            <circle cx="74" cy="55" r="8" fill="#0b0b0b" />
-            <circle cx="46" cy="53" r="3" fill="#f6f6f6" opacity="0.8" />
-            <circle cx="74" cy="53" r="3" fill="#f6f6f6" opacity="0.8" />
-            <path d="M50 76 Q60 84 70 76" stroke="#0b090a" stroke-width="6" stroke-linecap="round" />
-          </svg>
+      <div class="live-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+      </div>
+
+      <section class="split">
+        <div class="hero glass">
+          <header class="brand">
+            <div class="logo-mark" aria-hidden="true">
+              <svg class="logo-svg" viewBox="0 0 120 120" role="presentation">
+                <defs>
+                  <linearGradient id="clawGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff8a00" />
+                    <stop offset="100%" stop-color="#ff5e3a" />
+                  </linearGradient>
+                </defs>
+                <circle cx="60" cy="60" r="52" fill="url(#clawGradient)" opacity="0.92" />
+                <path
+                  d="M32 34 C24 44 26 60 42 62 C28 62 22 76 30 86 C36 94 56 92 60 78 C64 92 84 94 90 86 C98 76 92 62 78 62 C94 60 96 44 88 34 C82 26 70 26 60 34 C50 26 38 26 32 34Z"
+                  fill="#0b090a"
+                  opacity="0.24"
+                />
+                <circle cx="46" cy="55" r="8" fill="#0b0b0b" />
+                <circle cx="74" cy="55" r="8" fill="#0b0b0b" />
+              </svg>
+            </div>
+            <div>
+              <p class="eyebrow">claudeaiblog.com</p>
+              <h1>Claude AI Blog &amp; Waitlist</h1>
+            </div>
+          </header>
+          <p class="lede">
+            Immersive briefs on Claude AI plus early-access updates. Live design, minimal friction, and fast opt-in for
+            SMS/email drops.
+          </p>
+          <div class="cta-row">
+            <a class="button" href="/consumer-ca.html">Join waitlist (CA)</a>
+            <a class="button ghost" href="/consumer-ga.html">Join waitlist (GA)</a>
+          </div>
+          <p class="fineprint">General informational use. No login required.</p>
         </div>
-        <div>
-          <p class="eyebrow">claudeaiblog.com</p>
-          <h1>Claude AI Blog &amp; Waitlist</h1>
-        </div>
-      </header>
 
-      <section class="hero glass">
-        <p class="lede">
-          Read quick takes on Claude AI and join the early-access waitlist for
-          updates, drops, and invites. No login required; consent and phone
-          ownership attestation included.
-        </p>
-        <p class="fineprint">General informational use.</p>
-      </section>
-
-      <section class="card-grid">
-        <article class="card">
-          <p class="card-kicker">California</p>
-          <h2>Join the waitlist — CA</h2>
-          <p>California readers: drop your details for Claude AI updates.</p>
-          <a class="button" href="/consumer-ca.html">Join waitlist (CA)</a>
-        </article>
-
-        <article class="card">
-          <p class="card-kicker">Georgia</p>
-          <h2>Join the waitlist — GA</h2>
-          <p>Georgia readers: join the Claude AI updates and access list.</p>
-          <a class="button" href="/consumer-ga.html">Join waitlist (GA)</a>
-        </article>
+        <aside class="card auth-card glass">
+          <p class="card-kicker">Fast access</p>
+          <h2>Get updates as we ship</h2>
+          <p>Pick your state and drop into the list. Phone ownership attestation required.</p>
+          <div class="stacked-links">
+            <a class="button" href="/consumer-ca.html">California form</a>
+            <a class="button ghost" href="/consumer-ga.html">Georgia form</a>
+          </div>
+          <div class="status">
+            <p>What to expect:</p>
+            <ul>
+              <li>Short release notes and workflows.</li>
+              <li>SMS/email invites for new drops.</li>
+              <li>One-click opt-out anytime.</li>
+            </ul>
+          </div>
+        </aside>
       </section>
 
       <section class="card-grid blog-grid">
@@ -93,11 +92,27 @@
         <div class="footer-left">
           <p class="fineprint">General informational use.</p>
           <p class="fineprint">Contact: <a href="mailto:steven@clearsoultions.com">steven@clearsoultions.com</a></p>
+          <p class="fineprint">© 2026 Anthropic PBC (reference content)</p>
         </div>
         <div class="footer-right">
           <a class="fineprint" href="/notes">Admin</a>
           <span class="dot">•</span>
           <a class="fineprint" href="/privacy.html">Privacy Policy</a>
+          <span class="dot">•</span>
+          <div class="socials">
+            <a aria-label="X" href="#">
+              <svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M4 4h3l5 6 5-6h3l-6.5 7.5L20 20h-3l-5-6-5 6H4l6.5-7.5z"/></svg>
+            </a>
+            <a aria-label="LinkedIn" href="#">
+              <svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6 1.12 6 0 4.88 0 3.5 0 2.12 1.12 1 2.5 1 3.88 1 4.98 2.12 4.98 3.5zM.22 23.5h4.56V7.98H.22V23.5zM8.66 7.98h4.37v2.12h.06c.61-1.16 2.1-2.38 4.32-2.38 4.62 0 5.47 3.04 5.47 6.98v8.8h-4.54v-7.8c0-1.86-.03-4.26-2.6-4.26-2.6 0-3 2.03-3 4.12v7.94H8.66V7.98z"/></svg>
+            </a>
+            <a aria-label="YouTube" href="#">
+              <svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M23.5 6.2s-.2-1.7-.9-2.4c-.8-.9-1.7-.9-2.1-1C17.4 2.5 12 2.5 12 2.5h0s-5.4 0-8.5.3c-.5.1-1.3.1-2.1 1C.7 4.5.5 6.2.5 6.2S.3 8 .3 9.7v1.6C.3 13 .5 14.8.5 14.8s.2 1.7.9 2.4c.8.9 1.9.9 2.4 1 1.8.2 7.2.3 7.2.3s5.4 0 8.5-.3c.5-.1 1.3-.1 2.1-1 .7-.7.9-2.4.9-2.4s.2-1.8.2-3.5V9.7c0-1.7-.2-3.5-.2-3.5zM9.8 13.9V7.8l5.8 3.1-5.8 3z"/></svg>
+            </a>
+            <a aria-label="Instagram" href="#">
+              <svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.3 2.4.6.6.3 1 .7 1.5 1.2.5.5.9.9 1.2 1.5.3.5.5 1.2.6 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.9-.6 2.4-.3.6-.7 1-1.2 1.5-.5.5-.9.9-1.5 1.2-.5.3-1.2.5-2.4.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.3-2.4-.6-.6-.3-1-.7-1.5-1.2-.5-.5-.9-.9-1.2-1.5-.3-.5-.5-1.2-.6-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.9.6-2.4.3-.6.7-1 1.2-1.5.5-.5.9-.9 1.5-1.2.5-.3 1.2-.5 2.4-.6C8.4 2.2 8.8 2.2 12 2.2m0-1.7C8.7.5 8.3.5 7 .6 5.7.7 4.8.9 4 .3c-.9.5-1.7 1.1-2.4 1.9C.9 3 .7 3.9.6 5.2.5 6.5.5 6.9.5 10.2v3.6c0 3.3 0 3.7.1 5 .1 1.3.3 2.2 1 3 .6.8 1.4 1.4 2.4 1.9.8.4 1.7.6 3 .7 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.3 3-.7.9-.5 1.7-1.1 2.4-1.9.7-.8.9-1.7 1-3 .1-1.3.1-1.7.1-5.1V10.2c0-3.3 0-3.7-.1-5-.1-1.3-.3-2.2-1-3-.6-.8-1.4-1.4-2.4-1.9-.8-.4-1.7-.6-3-.7C15.7.5 15.3.5 12 .5z"/><path fill="currentColor" d="M12 5.8A6.2 6.2 0 0 0 5.8 12 6.2 6.2 0 0 0 12 18.2 6.2 6.2 0 0 0 18.2 12 6.2 6.2 0 0 0 12 5.8m0 10.2A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle fill="currentColor" cx="18.4" cy="5.6" r="1.2"/></svg>
+            </a>
+          </div>
         </div>
       </footer>
     </main>
