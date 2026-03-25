@@ -38,6 +38,10 @@ const segments = {
 ensureDataFiles();
 
 const server = http.createServer(async (req, res) => {
+  if (req.method === "GET" && req.url === "/healthz") {
+    return sendText(res, 200, "ok");
+  }
+
   if (!isAuthorized(req)) {
     res.writeHead(401, {
       "WWW-Authenticate": 'Basic realm="Inbound Lead Intake"',
