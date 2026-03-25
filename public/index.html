@@ -10,11 +10,35 @@
     <main class="shell">
       <header class="brand">
         <div class="logo-mark" aria-hidden="true">
-          <div class="pincer pincer-left"></div>
-          <div class="pincer pincer-right"></div>
-          <div class="claw"></div>
-          <div class="eye eye-left"></div>
-          <div class="eye eye-right"></div>
+          <svg class="logo-svg" viewBox="0 0 120 120" role="presentation">
+            <defs>
+              <linearGradient id="clawGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff5f56" />
+                <stop offset="100%" stop-color="#b11212" />
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="60" r="52" fill="url(#clawGradient)" opacity="0.92" />
+            <path
+              d="M32 34 C24 44 26 60 42 62 C28 62 22 76 30 86 C36 94 56 92 60 78 C64 92 84 94 90 86 C98 76 92 62 78 62 C94 60 96 44 88 34 C82 26 70 26 60 34 C50 26 38 26 32 34Z"
+              fill="#0b090a"
+              opacity="0.28"
+            />
+            <path
+              d="M24 30 L44 36 C40 28 36 22 30 20 Z"
+              fill="#ff5f56"
+              opacity="0.9"
+            />
+            <path
+              d="M96 30 L76 36 C80 28 84 22 90 20 Z"
+              fill="#ff5f56"
+              opacity="0.9"
+            />
+            <circle cx="46" cy="55" r="8" fill="#0b0b0b" />
+            <circle cx="74" cy="55" r="8" fill="#0b0b0b" />
+            <circle cx="46" cy="53" r="3" fill="#f6f6f6" opacity="0.8" />
+            <circle cx="74" cy="53" r="3" fill="#f6f6f6" opacity="0.8" />
+            <path d="M50 76 Q60 84 70 76" stroke="#0b090a" stroke-width="6" stroke-linecap="round" />
+          </svg>
         </div>
         <div>
           <p class="eyebrow">claudeaiblog.com</p>
