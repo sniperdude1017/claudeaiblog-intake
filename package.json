@@ -1,0 +1,12 @@
+{
+  "name": "inbound-lead-intake",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local or simple-hosted inbound consumer lead intake",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

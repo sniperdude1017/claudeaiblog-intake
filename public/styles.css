@@ -1,0 +1,181 @@
+:root {
+  --bg: #ede7dc;
+  --paper: rgba(255, 252, 247, 0.9);
+  --ink: #171717;
+  --muted: #5d5a53;
+  --line: rgba(23, 23, 23, 0.08);
+  --sand: #c9b59a;
+  --sand-dark: #8d7453;
+  --forest: #23443b;
+  --clay: #8a5a44;
+  --shadow: 0 24px 80px rgba(23, 23, 23, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(201, 181, 154, 0.32), transparent 28%),
+    radial-gradient(circle at right center, rgba(35, 68, 59, 0.12), transparent 24%),
+    linear-gradient(135deg, #ece4d8, #f8f5ef 55%, #e4dbcf);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--forest);
+}
+
+.shell {
+  width: min(960px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+.hero,
+.segment,
+.form-wrap,
+.status,
+.card {
+  background: rgba(255, 250, 242, 0.92);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  border-radius: 24px;
+}
+
+.hero,
+.segment {
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.segment-wells {
+  border-top: 8px solid var(--sand);
+}
+
+.segment-truist {
+  border-top: 8px solid var(--clay);
+}
+
+.eyebrow,
+.card-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+h1,
+h2 {
+  margin: 0 0 10px;
+  line-height: 1.05;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4vw, 4.5rem);
+  max-width: 12ch;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+.lede,
+.card p,
+.status p,
+label {
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.disclaimer {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.card-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-bottom: 24px;
+}
+
+.card,
+.form-wrap,
+.status {
+  padding: 24px;
+}
+
+.button {
+  display: inline-block;
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, var(--forest), #365d52);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lead-form {
+  display: grid;
+  gap: 16px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: #fff;
+  font: inherit;
+  color: var(--ink);
+}
+
+.checkbox {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-weight: 400;
+}
+
+.checkbox input {
+  width: 18px;
+  height: 18px;
+  margin-top: 4px;
+}
+
+.form-status {
+  min-height: 1.5em;
+  color: var(--sand-dark);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .shell {
+    width: min(100vw - 20px, 960px);
+    padding-top: 20px;
+  }
+
+  .hero,
+  .segment,
+  .card,
+  .form-wrap,
+  .status {
+    border-radius: 18px;
+    padding: 20px;
+  }
+}

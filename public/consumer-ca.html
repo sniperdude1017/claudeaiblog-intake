@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>claudeaiblog.com | California Consumer Request</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="segment segment-wells">
+        <p class="eyebrow">claudeaiblog.com | California</p>
+        <h1>California consumer request</h1>
+        <p class="lede">
+          Use this protected form if you are in California and want follow-up
+          by email and text about your request.
+        </p>
+        <p class="disclaimer">
+          Independent site. Not affiliated with Anthropic or Claude.
+        </p>
+      </section>
+      <section class="form-wrap">
+        <form class="lead-form" data-segment="consumer-ca">
+          <label>
+            Full name
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email" required />
+          </label>
+          <label>
+            Mobile phone
+            <input name="phone" type="tel" autocomplete="tel" required />
+          </label>
+          <label>
+            California ZIP code
+            <input name="zip" type="text" inputmode="numeric" required />
+          </label>
+          <label class="checkbox">
+            <input name="ownsPhone" type="checkbox" required />
+            I confirm this mobile number belongs to me and I can receive texts on it.
+          </label>
+          <label class="checkbox">
+            <input name="consent" type="checkbox" required />
+            I agree to receive email and SMS follow-up about this request.
+          </label>
+          <button class="button" type="submit">Submit request</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

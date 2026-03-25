@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: inbound-lead-intake
+    env: node
+    plan: starter
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    autoDeploy: false
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATA_DIR
+        value: /var/data
+      - key: BASIC_AUTH_USERNAME
+        sync: false
+      - key: BASIC_AUTH_PASSWORD
+        sync: false
+      - key: ALLOW_LEAD_READS
+        value: "false"
+    disk:
+      name: inbound-data
+      mountPath: /var/data
+      sizeGB: 1
