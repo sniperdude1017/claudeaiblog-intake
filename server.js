@@ -51,8 +51,10 @@ const server = http.createServer(async (req, res) => {
     return sendText(res, 200, "ok");
   }
 
+  const url = new URL(req.url, `http://${req.headers.host}`);
+
   if (!isAuthorized(req)) {
-    if (PUBLIC_PATHS.has(req.url) || (req.method === "POST" && req.url === "/api/leads")) {
+    if (PUBLIC_PATHS.has(url.pathname) || (req.method === "POST" && url.pathname === "/api/leads")) {
       // allow public routes and lead submissions without auth
     } else {
       res.writeHead(401, {
@@ -63,8 +65,6 @@ const server = http.createServer(async (req, res) => {
       return;
     }
   }
-
-  const url = new URL(req.url, `http://${req.headers.host}`);
 
   if (req.method === "GET" && url.pathname === "/api/leads") {
     if (!ALLOW_LEAD_READS) {
