@@ -33,6 +33,14 @@ for (const form of forms) {
         throw new Error(result.error || "Submission failed");
       }
 
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: "lead",
+          segment: payload.segment,
+          state: payload.segment === "consumer-ca" ? "CA" : payload.segment === "consumer-ga" ? "GA" : "unknown",
+        });
+      }
+
       form.reset();
       status.textContent = "Success, your request has been sent.";
     } catch (error) {
