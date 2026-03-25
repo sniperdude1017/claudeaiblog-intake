@@ -188,19 +188,20 @@ input {
 }
 
 .logo-mark {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  background: radial-gradient(circle at 40% 40%, rgba(229, 57, 53, 0.4), rgba(165, 22, 22, 0.2));
-  box-shadow: 0 18px 40px rgba(229, 57, 53, 0.35);
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 59, 48, 0.6), rgba(177, 18, 18, 0.3));
+  box-shadow: 0 22px 46px rgba(255, 59, 48, 0.4);
   display: grid;
   place-items: center;
 }
 
 .logo-svg {
-  width: 60px;
-  height: 60px;
+  width: 68px;
+  height: 68px;
   display: block;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
 }
 
 .glass {
