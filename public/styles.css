@@ -204,6 +204,37 @@ input {
   right: 16px;
 }
 
+.glass {
+  backdrop-filter: blur(10px);
+  background: linear-gradient(160deg, rgba(23, 18, 18, 0.85), rgba(15, 12, 12, 0.82));
+}
+
+.fineprint {
+  color: var(--muted);
+  font-size: 0.86rem;
+  margin: 6px 0 0;
+}
+
+.footer {
+  margin-top: 28px;
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.footer a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.footer .dot {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 @media (max-width: 640px) {
   .shell {
     width: min(100vw - 20px, 960px);
