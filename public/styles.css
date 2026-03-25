@@ -41,8 +41,8 @@ a {
 .form-wrap,
 .status,
 .card {
-  background: linear-gradient(160deg, rgba(14, 12, 12, 0.65), rgba(8, 6, 6, 0.55));
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(160deg, rgba(14, 12, 12, 0.52), rgba(6, 4, 4, 0.45));
+  border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: var(--shadow);
   border-radius: 20px;
   backdrop-filter: blur(18px) saturate(120%);
