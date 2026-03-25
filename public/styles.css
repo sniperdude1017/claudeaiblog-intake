@@ -1,12 +1,12 @@
 :root {
-  --bg: #080707;
-  --panel: #0f0c0c;
-  --ink: #f6f6f6;
-  --muted: #b8b3b3;
-  --line: rgba(255, 255, 255, 0.08);
-  --red: #e53935;
-  --red-dark: #a51616;
-  --shadow: 0 26px 90px rgba(0, 0, 0, 0.6);
+  --bg: #040404;
+  --panel: rgba(12, 10, 10, 0.6);
+  --ink: #f7f7f7;
+  --muted: #b0aaaa;
+  --line: rgba(255, 255, 255, 0.12);
+  --red: #ff3b30;
+  --red-dark: #b11212;
+  --shadow: 0 32px 120px rgba(0, 0, 0, 0.7);
 }
 
 * {
@@ -20,9 +20,9 @@ body {
   font-family: "Space Grotesk", "Sora", "Inter", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at 20% 20%, rgba(229, 57, 53, 0.18), transparent 28%),
-    radial-gradient(circle at 80% 0%, rgba(165, 22, 22, 0.2), transparent 24%),
-    linear-gradient(145deg, #0b0a0c, #120d0e 50%, #0a0809);
+    radial-gradient(circle at 20% 20%, rgba(255, 59, 48, 0.18), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(177, 18, 18, 0.2), transparent 24%),
+    linear-gradient(145deg, #060607, #0c090a 55%, #050404);
   min-height: 100vh;
 }
 
@@ -41,10 +41,25 @@ a {
 .form-wrap,
 .status,
 .card {
-  background: linear-gradient(160deg, rgba(23, 18, 18, 0.9), rgba(17, 15, 15, 0.85));
-  border: 1px solid var(--line);
+  background: linear-gradient(160deg, rgba(14, 12, 12, 0.65), rgba(8, 6, 6, 0.55));
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: var(--shadow);
   border-radius: 20px;
+  backdrop-filter: blur(18px) saturate(120%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before,
+.segment::before,
+.form-wrap::before,
+.status::before,
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.05), transparent 40%);
+  pointer-events: none;
 }
 
 .hero,
@@ -140,9 +155,10 @@ input {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 14px 16px;
-  background: #121010;
+  background: rgba(20, 18, 18, 0.6);
   font: inherit;
   color: var(--ink);
+  backdrop-filter: blur(8px);
 }
 
 .checkbox {
@@ -178,6 +194,25 @@ input {
   border-radius: 14px;
   background: radial-gradient(circle at 40% 40%, rgba(229, 57, 53, 0.9), rgba(165, 22, 22, 0.9));
   box-shadow: 0 12px 32px rgba(229, 57, 53, 0.25);
+}
+
+.logo-mark .pincer {
+  position: absolute;
+  width: 18px;
+  height: 14px;
+  background: linear-gradient(135deg, #ff5f56, #c31111);
+  border-radius: 14px 14px 6px 6px;
+  top: 8px;
+}
+
+.logo-mark .pincer-left {
+  left: 6px;
+  transform: rotate(-28deg);
+}
+
+.logo-mark .pincer-right {
+  right: 6px;
+  transform: rotate(28deg);
 }
 
 .logo-mark .claw {
