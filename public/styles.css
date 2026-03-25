@@ -34,6 +34,72 @@ a {
   width: min(1200px, calc(100vw - 48px));
   margin: 0 auto;
   padding: 32px 0 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.live-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.32;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 138, 0, 0.8), transparent 65%);
+  animation: drift 16s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+  top: -120px;
+  left: -80px;
+}
+.orb-2 {
+  bottom: -160px;
+  right: -60px;
+  background: radial-gradient(circle at 70% 40%, rgba(255, 94, 58, 0.7), transparent 70%);
+  animation-duration: 18s;
+}
+.orb-3 {
+  top: 30%;
+  left: 45%;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 138, 0, 0.5), transparent 70%);
+  animation-duration: 20s;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(20px, -30px, 0) scale(1.05);
+  }
+}
+
+.split {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 28px;
+}
+
+.hero {
+  flex: 0 0 60%;
+}
+
+.auth-card {
+  flex: 0 0 40%;
+  max-width: 420px;
+  margin-left: auto;
 }
 
 .hero,
@@ -138,6 +204,11 @@ label {
   text-decoration: none;
   font-weight: 700;
   cursor: pointer;
+}
+
+.button.ghost {
+  background: transparent;
+  border: 1px solid var(--line);
 }
 
 .lead-form {
@@ -271,5 +342,15 @@ input {
   .status {
     border-radius: 18px;
     padding: 20px;
+  }
+
+  .split {
+    flex-direction: column;
+  }
+
+  .hero,
+  .auth-card {
+    flex: 1 1 auto;
+    max-width: 100%;
   }
 }
