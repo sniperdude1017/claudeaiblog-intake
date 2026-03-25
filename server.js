@@ -1,6 +1,7 @@
 const http = require("http");
 const crypto = require("crypto");
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 const { URL } = require("url");
 
@@ -8,9 +9,10 @@ const PORT = process.env.PORT || 3030;
 const HOST = process.env.HOST || "127.0.0.1";
 const ROOT = __dirname;
 const PUBLIC_DIR = path.join(ROOT, "public");
-const DATA_DIR = process.env.DATA_DIR
+const REQUESTED_DATA_DIR = process.env.DATA_DIR
   ? path.resolve(process.env.DATA_DIR)
   : path.join(ROOT, "data");
+const DATA_DIR = resolveWritableDataDir(REQUESTED_DATA_DIR);
 const JSON_PATH = path.join(DATA_DIR, "leads.json");
 const CSV_PATH = path.join(DATA_DIR, "leads.csv");
 const NOTES_PATH = path.join(DATA_DIR, "notes-export.txt");
@@ -97,6 +99,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, HOST, () => {
   console.log(`Inbound lead intake running on http://${HOST}:${PORT}`);
+  console.log(`Lead data directory: ${DATA_DIR}`);
 });
 
 function ensureDataFiles() {
@@ -113,6 +116,27 @@ function ensureDataFiles() {
       "Inbound lead notes\n\nNo leads captured yet.\n"
     );
   }
+}
+
+function resolveWritableDataDir(preferredDir) {
+  const candidates = [
+    preferredDir,
+    path.join(os.tmpdir(), "inbound-lead-intake-data"),
+  ];
+
+  for (const candidate of candidates) {
+    try {
+      fs.mkdirSync(candidate, { recursive: true });
+      const testPath = path.join(candidate, ".write-test");
+      fs.writeFileSync(testPath, "ok");
+      fs.unlinkSync(testPath);
+      return candidate;
+    } catch {
+      continue;
+    }
+  }
+
+  throw new Error("No writable data directory available");
 }
 
 function ensureCredentials() {
