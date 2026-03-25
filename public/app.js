@@ -33,7 +33,7 @@ for (const form of forms) {
       }
 
       form.reset();
-      status.textContent = "Saved. The lead has been added to the ordered notes export.";
+      status.textContent = "Success, your request has been sent.";
     } catch (error) {
       status.textContent = error.message;
     }
