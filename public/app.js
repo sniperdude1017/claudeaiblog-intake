@@ -13,6 +13,7 @@ for (const form of forms) {
       name: formData.get("name"),
       email: formData.get("email"),
       phone: formData.get("phone"),
+      city: formData.get("city"),
       zip: formData.get("zip"),
       ownsPhone: formData.get("ownsPhone") === "on",
       consent: formData.get("consent") === "on",

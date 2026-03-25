@@ -7,6 +7,11 @@
   --orange: #ff8a00;
   --orange-dark: #ff5e3a;
   --shadow: 0 32px 140px rgba(0, 0, 0, 0.7);
+  /* Official Brand Palette */
+  --claude-primary: #c15f3c; /* Crail (Terracotta Orange) */
+  --claude-bg: #f4f3ee;      /* Pampas (Warm Off-White) */
+  --claude-accent: #b1ada1;  /* Cloudy (Neutral Gray) */
+  --claude-dark: #1f1e1d;    /* Deep Charcoal (Text) */
 }
 
 * {
@@ -291,6 +296,19 @@ input {
   height: 68px;
   display: block;
   filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+}
+
+.claude-logo {
+  width: 68px;
+  height: 68px;
+  fill: var(--claude-primary);
+  image-rendering: pixelated;
+  transition: transform 0.2s ease-in-out;
+}
+
+.claude-logo:hover {
+  transform: scale(1.05);
+  fill: #d9734d;
 }
 
 .glass {
