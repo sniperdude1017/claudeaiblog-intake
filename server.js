@@ -230,7 +230,10 @@ function serveFile(res, filePath) {
     if (error) {
       return sendText(res, 404, "Not Found");
     }
-    res.writeHead(200, { "Content-Type": contentType(filePath) });
+    res.writeHead(200, {
+      "Content-Type": contentType(filePath),
+      "Cache-Control": "no-store",
+    });
     res.end(content);
   });
 }
