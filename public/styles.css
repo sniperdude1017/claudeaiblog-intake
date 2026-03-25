@@ -1,33 +1,33 @@
 :root {
-  --bg: #ede7dc;
-  --paper: rgba(255, 252, 247, 0.9);
-  --ink: #171717;
-  --muted: #5d5a53;
-  --line: rgba(23, 23, 23, 0.08);
-  --sand: #c9b59a;
-  --sand-dark: #8d7453;
-  --forest: #23443b;
-  --clay: #8a5a44;
-  --shadow: 0 24px 80px rgba(23, 23, 23, 0.08);
+  --bg: #080707;
+  --panel: #0f0c0c;
+  --ink: #f6f6f6;
+  --muted: #b8b3b3;
+  --line: rgba(255, 255, 255, 0.08);
+  --red: #e53935;
+  --red-dark: #a51616;
+  --shadow: 0 26px 90px rgba(0, 0, 0, 0.6);
 }
 
 * {
   box-sizing: border-box;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@500;600&display=swap");
+
 body {
   margin: 0;
-  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "Space Grotesk", "Sora", "Inter", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(201, 181, 154, 0.32), transparent 28%),
-    radial-gradient(circle at right center, rgba(35, 68, 59, 0.12), transparent 24%),
-    linear-gradient(135deg, #ece4d8, #f8f5ef 55%, #e4dbcf);
+    radial-gradient(circle at 20% 20%, rgba(229, 57, 53, 0.18), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(165, 22, 22, 0.2), transparent 24%),
+    linear-gradient(145deg, #0b0a0c, #120d0e 50%, #0a0809);
   min-height: 100vh;
 }
 
 a {
-  color: var(--forest);
+  color: var(--red);
 }
 
 .shell {
@@ -41,10 +41,10 @@ a {
 .form-wrap,
 .status,
 .card {
-  background: rgba(255, 250, 242, 0.92);
+  background: linear-gradient(160deg, rgba(23, 18, 18, 0.9), rgba(17, 15, 15, 0.85));
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
-  border-radius: 24px;
+  border-radius: 20px;
 }
 
 .hero,
@@ -54,11 +54,11 @@ a {
 }
 
 .segment-wells {
-  border-top: 8px solid var(--sand);
+  border-top: 6px solid var(--red);
 }
 
 .segment-truist {
-  border-top: 8px solid var(--clay);
+  border-top: 6px solid var(--red-dark);
 }
 
 .eyebrow,
@@ -77,12 +77,12 @@ h2 {
 }
 
 h1 {
-  font-size: clamp(2.2rem, 4vw, 4.5rem);
-  max-width: 12ch;
+  font-size: clamp(2.2rem, 4vw, 4.2rem);
+  max-width: 18ch;
 }
 
 h2 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 .lede,
@@ -96,7 +96,7 @@ label {
 .disclaimer {
   margin: 14px 0 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
 
 .card-grid {
@@ -117,7 +117,7 @@ label {
   border: 0;
   border-radius: 999px;
   padding: 14px 20px;
-  background: linear-gradient(135deg, var(--forest), #365d52);
+  background: linear-gradient(135deg, var(--red), var(--red-dark));
   color: #fff;
   text-decoration: none;
   font-weight: 700;
@@ -140,7 +140,7 @@ input {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 14px 16px;
-  background: #fff;
+  background: #121010;
   font: inherit;
   color: var(--ink);
 }
@@ -160,8 +160,48 @@ input {
 
 .form-status {
   min-height: 1.5em;
-  color: var(--sand-dark);
+  color: var(--red);
   font-weight: 700;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.logo-mark {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 40% 40%, rgba(229, 57, 53, 0.9), rgba(165, 22, 22, 0.9));
+  box-shadow: 0 12px 32px rgba(229, 57, 53, 0.25);
+}
+
+.logo-mark .claw {
+  position: absolute;
+  inset: 12px;
+  border-radius: 40% 60% 50% 70%;
+  background: linear-gradient(160deg, #ff5f56, #c31111);
+  transform: rotate(-8deg);
+}
+
+.logo-mark .eye {
+  position: absolute;
+  top: 22px;
+  width: 8px;
+  height: 12px;
+  background: #0b0b0b;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+.logo-mark .eye-left {
+  left: 16px;
+}
+.logo-mark .eye-right {
+  right: 16px;
 }
 
 @media (max-width: 640px) {

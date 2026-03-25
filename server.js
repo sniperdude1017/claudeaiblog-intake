@@ -21,6 +21,15 @@ const ALLOW_LEAD_READS = process.env.ALLOW_LEAD_READS === "true";
 const credentials = ensureCredentials();
 const CSV_HEADER =
   "timestamp,name,phone,email,market,state,zip,segment,consent_source,owns_phone,phone_verification_status\n";
+const PUBLIC_PATHS = new Set([
+  "/",
+  "/index.html",
+  "/consumer-ca.html",
+  "/consumer-ga.html",
+  "/app.js",
+  "/styles.css",
+  "/healthz",
+]);
 
 const segments = {
   "consumer-ca": {
@@ -43,12 +52,16 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (!isAuthorized(req)) {
-    res.writeHead(401, {
-      "WWW-Authenticate": 'Basic realm="Inbound Lead Intake"',
-      "Cache-Control": "no-store",
-    });
-    res.end("Authentication required");
-    return;
+    if (PUBLIC_PATHS.has(req.url) || (req.method === "POST" && req.url === "/api/leads")) {
+      // allow public routes and lead submissions without auth
+    } else {
+      res.writeHead(401, {
+        "WWW-Authenticate": 'Basic realm="Inbound Lead Intake"',
+        "Cache-Control": "no-store",
+      });
+      res.end("Authentication required");
+      return;
+    }
   }
 
   const url = new URL(req.url, `http://${req.headers.host}`);
