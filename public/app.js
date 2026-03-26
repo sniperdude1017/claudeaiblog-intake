@@ -240,12 +240,16 @@ function handleThankYouPage() {
   const detail = document.querySelector("[data-thanks-detail]");
 
   if (copy) {
-    copy.textContent = `Thanks for joining the ${stateLabel} waitlist. We saved your request and will use your selected contact channels for updates.`;
+    const intro =
+      segment && stateLabel !== "selected"
+        ? `Thanks for joining the ${stateLabel} Claude update list.`
+        : "Thanks for joining the Claude update list.";
+    copy.textContent = `${intro} We saved your request and will use your selected contact channels for launch notes, feature updates, and workflow roundups.`;
   }
 
   if (detail) {
     detail.textContent =
-      "If you came from a paid campaign, this page is the clean conversion destination for tracking and reporting.";
+      "Watch for source-backed Claude model notes, product changes, and practical workflow breakdowns.";
   }
 
   if (!lead) {

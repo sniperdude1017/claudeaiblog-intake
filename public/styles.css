@@ -202,7 +202,9 @@ a {
   margin-bottom: 0;
 }
 .split > .hero,
-.split > .auth-card {
+.split > .auth-card,
+.split > .segment,
+.split > .form-wrap {
   margin-bottom: 0;
 }
 

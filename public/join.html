@@ -3,55 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>claudeaiblog.com | Join Waitlist</title>
-    <script src="/config.js?v=22"></script>
-    <link rel="stylesheet" href="/styles.css?v=22" />
+    <title>claudeaiblog.com | Get Claude Updates</title>
+    <script src="/config.js?v=23"></script>
+    <link rel="stylesheet" href="/styles.css?v=23" />
   </head>
   <body>
     <main class="shell">
-      <section class="segment glass">
-        <p class="eyebrow">claudeaiblog.com</p>
-        <h1>Join the waitlist</h1>
-        <p class="lede">
-          Enter your full contact details and preferred callback window. Include
-          your California or Georgia state in the address so we can route your request.
-        </p>
-        <p class="fineprint">Example: `123 Main St, Atlanta, GA 30303` or `456 Pine Ave, Los Angeles, CA 90012`.</p>
-      </section>
-
-      <section class="form-wrap">
-        <form class="lead-form">
-          <label>
-            Full name
-            <input name="name" type="text" autocomplete="name" required />
-          </label>
-          <label>
-            Email
-            <input name="email" type="email" autocomplete="email" required />
-          </label>
-          <label>
-            Mobile phone
-            <input name="phone" type="tel" autocomplete="tel" required />
-          </label>
-          <label>
-            Address
-            <input name="address" type="text" autocomplete="street-address" required />
-          </label>
-          <div class="time-grid">
-            <label>
-              Best time to be reached from
-              <input name="bestTimeStart" type="time" step="900" required />
-            </label>
-            <label>
-              Best time to be reached until
-              <input name="bestTimeEnd" type="time" step="900" required />
-            </label>
+      <section class="split">
+        <section class="segment glass">
+          <p class="eyebrow">claudeaiblog.com</p>
+          <h1>Stay on top of every Claude update without reading every release post</h1>
+          <p class="lede">
+            Independent coverage of Claude models, Claude Code, Projects,
+            Artifacts, and practical workflows for writing, coding, research,
+            and analysis. The focus is simple: what changed, why it matters,
+            and what to try next.
+          </p>
+          <div class="topic-row" aria-label="Claude update topics">
+            <span class="topic-pill">Model launches</span>
+            <span class="topic-pill">Claude Code</span>
+            <span class="topic-pill">Projects &amp; Artifacts</span>
+            <span class="topic-pill">Workflow breakdowns</span>
           </div>
-          <button class="button" type="submit">Join waitlist</button>
-          <p class="form-status" aria-live="polite"></p>
-        </form>
+          <div class="metrics">
+            <div class="metric">
+              <span class="metric-value">Launch notes</span>
+              <span class="metric-label">Readable summaries of new Claude releases</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">Feature guides</span>
+              <span class="metric-label">Projects, Artifacts, Claude Code, and product changes</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">Real use cases</span>
+              <span class="metric-label">Writing, coding, research, and analysis workflows</span>
+            </div>
+          </div>
+          <div class="status">
+            <p>Why people join:</p>
+            <ul>
+              <li>Faster read on official Claude and Anthropic updates.</li>
+              <li>Less generic AI noise and more practical product context.</li>
+              <li>Clear follow-up around the Claude features worth paying attention to.</li>
+            </ul>
+          </div>
+          <p class="fineprint">
+            Short, source-backed updates when Claude ships something worth
+            knowing. No filler.
+          </p>
+        </section>
+
+        <section class="form-wrap">
+          <p class="card-kicker">Priority Signup</p>
+          <h2>Get on the Claude update list</h2>
+          <p class="lede">
+            Enter your contact details and preferred callback window. Include your
+            full address so we can route California or Georgia correctly.
+          </p>
+          <p class="fineprint">Example: `123 Main St, Atlanta, GA 30303` or `456 Pine Ave, Los Angeles, CA 90012`.</p>
+          <form class="lead-form">
+            <label>
+              Full name
+              <input name="name" type="text" autocomplete="name" required />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" required />
+            </label>
+            <label>
+              Mobile phone
+              <input name="phone" type="tel" autocomplete="tel" required />
+            </label>
+            <label>
+              Address
+              <input name="address" type="text" autocomplete="street-address" required />
+            </label>
+            <div class="time-grid">
+              <label>
+                Best time to be reached from
+                <input name="bestTimeStart" type="time" step="900" required />
+              </label>
+              <label>
+                Best time to be reached until
+                <input name="bestTimeEnd" type="time" step="900" required />
+              </label>
+            </div>
+            <button class="button" type="submit">Get Claude updates</button>
+            <p class="form-status" aria-live="polite"></p>
+          </form>
+        </section>
       </section>
     </main>
-    <script src="/app.js?v=22"></script>
+    <script src="/app.js?v=23"></script>
   </body>
 </html>
