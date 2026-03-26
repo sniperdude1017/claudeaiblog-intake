@@ -6,6 +6,7 @@
   --line: rgba(255, 255, 255, 0.12);
   --orange: #ff8a00;
   --orange-dark: #ff5e3a;
+  --red: #ff6b6b;
   --shadow: 0 32px 140px rgba(0, 0, 0, 0.7);
   /* Official Brand Palette */
   --claude-primary: #c15f3c; /* Crail (Terracotta Orange) */
@@ -51,6 +52,26 @@ a {
   pointer-events: none;
 }
 
+.bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.82;
+  filter: saturate(120%);
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 138, 0, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 40%, rgba(255, 94, 58, 0.08), transparent 42%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 32px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 32px);
+  mix-blend-mode: screen;
+}
+
 .orb {
   position: absolute;
   width: 520px;
@@ -91,18 +112,19 @@ a {
 }
 
 .split {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 420px);
   gap: 24px;
   align-items: stretch;
   margin-bottom: 28px;
 }
 
 .hero {
-  flex: 0 0 60%;
+  width: 100%;
 }
 
 .auth-card {
-  flex: 0 0 40%;
+  width: 100%;
   max-width: 420px;
   margin-left: auto;
 }
@@ -148,6 +170,52 @@ a {
   border-top: 6px solid var(--orange-dark);
 }
 
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 18px;
+  background: linear-gradient(160deg, rgba(23, 18, 18, 0.85), rgba(15, 12, 12, 0.82));
+  backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 2;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-title {
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.link-ghost {
+  color: var(--ink);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.link-ghost:hover {
+  color: var(--orange);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 .eyebrow,
 .card-kicker {
   text-transform: uppercase;
@@ -191,6 +259,39 @@ label {
   flex-direction: column;
   gap: 20px;
   margin-bottom: 24px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.metric {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.metric-value {
+  display: block;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--orange);
+}
+
+.metric-label {
+  color: var(--muted);
+  font-size: 0.92rem;
 }
 
 .card,
@@ -380,6 +481,26 @@ input {
   margin-top: 10px;
 }
 
+@media (max-width: 960px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-card {
+    max-width: 100%;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
 @media (max-width: 640px) {
   .shell {
     width: min(100vw - 20px, 960px);
@@ -396,12 +517,11 @@ input {
   }
 
   .split {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .hero,
   .auth-card {
-    flex: 1 1 auto;
     max-width: 100%;
   }
 }
