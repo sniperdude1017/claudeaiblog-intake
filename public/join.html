@@ -4,96 +4,159 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>claudeaiblog.com | Get Claude Updates</title>
-    <script src="/config.js?v=23"></script>
-    <link rel="stylesheet" href="/styles.css?v=23" />
+    <script src="/config.js?v=24"></script>
+    <link rel="stylesheet" href="/styles.css?v=24" />
   </head>
-  <body>
-    <main class="shell">
-      <section class="split">
-        <section class="segment glass">
+  <body class="join-page">
+    <main class="shell join-shell">
+      <header class="join-nav">
+        <a class="join-brand" href="/">
+          <span class="join-brand-mark" aria-hidden="true">
+            <svg class="join-brand-logo" viewBox="0 0 24 24" role="presentation">
+              <rect x="10" y="3" width="4" height="2" />
+              <rect x="9" y="5" width="6" height="2" />
+              <rect x="8" y="7" width="8" height="2" />
+              <rect x="7" y="9" width="10" height="2" />
+              <rect x="6" y="11" width="12" height="2" />
+              <rect x="5" y="13" width="4" height="2" />
+              <rect x="15" y="13" width="4" height="2" />
+              <rect x="5" y="15" width="4" height="2" />
+              <rect x="15" y="15" width="4" height="2" />
+              <rect x="6" y="17" width="12" height="2" />
+              <rect x="8" y="19" width="2" height="2" />
+              <rect x="14" y="19" width="2" height="2" />
+            </svg>
+          </span>
+          <span class="join-brand-text">Claude AI Blog</span>
+        </a>
+        <nav class="join-menu" aria-label="Landing page">
+          <a href="/">Home</a>
+          <a href="https://www.anthropic.com/claude" target="_blank" rel="noreferrer">Meet Claude</a>
+          <a href="https://www.anthropic.com/news" target="_blank" rel="noreferrer">Release Notes</a>
+          <a href="/privacy.html">Privacy</a>
+        </nav>
+        <div class="join-actions">
+          <a class="join-link-button" href="/">Back home</a>
+          <a class="join-primary-button" href="#join-form">Get updates</a>
+        </div>
+      </header>
+
+      <section class="join-hero-grid">
+        <section class="join-copy">
           <p class="eyebrow">claudeaiblog.com</p>
-          <h1>Stay on top of every Claude update without reading every release post</h1>
-          <p class="lede">
-            Independent coverage of Claude models, Claude Code, Projects,
-            Artifacts, and practical workflows for writing, coding, research,
-            and analysis. The focus is simple: what changed, why it matters,
-            and what to try next.
+          <h1 class="join-title">Think faster, track Claude faster</h1>
+          <p class="join-subtitle">
+            Stay on top of every Claude update without reading every release
+            post. Get source-backed notes on model launches, Claude Code,
+            Projects, Artifacts, and workflow changes that matter.
           </p>
-          <div class="topic-row" aria-label="Claude update topics">
-            <span class="topic-pill">Model launches</span>
-            <span class="topic-pill">Claude Code</span>
-            <span class="topic-pill">Projects &amp; Artifacts</span>
-            <span class="topic-pill">Workflow breakdowns</span>
-          </div>
-          <div class="metrics">
-            <div class="metric">
-              <span class="metric-value">Launch notes</span>
-              <span class="metric-label">Readable summaries of new Claude releases</span>
-            </div>
-            <div class="metric">
-              <span class="metric-value">Feature guides</span>
-              <span class="metric-label">Projects, Artifacts, Claude Code, and product changes</span>
-            </div>
-            <div class="metric">
-              <span class="metric-value">Real use cases</span>
-              <span class="metric-label">Writing, coding, research, and analysis workflows</span>
-            </div>
-          </div>
-          <div class="status">
-            <p>Why people join:</p>
-            <ul>
-              <li>Faster read on official Claude and Anthropic updates.</li>
-              <li>Less generic AI noise and more practical product context.</li>
-              <li>Clear follow-up around the Claude features worth paying attention to.</li>
-            </ul>
-          </div>
-          <p class="fineprint">
-            Short, source-backed updates when Claude ships something worth
-            knowing. No filler.
-          </p>
+
+          <section class="join-form-card glass" id="join-form">
+            <p class="join-form-kicker">Priority Signup</p>
+            <h2 class="join-form-title">Get on the Claude update list</h2>
+            <p class="join-form-copy">
+              Enter your details and preferred callback window. Include your full
+              address so we can route California or Georgia correctly.
+            </p>
+            <form class="lead-form">
+              <label>
+                Full name
+                <input name="name" type="text" autocomplete="name" required />
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" autocomplete="email" required />
+              </label>
+              <label>
+                Mobile phone
+                <input name="phone" type="tel" autocomplete="tel" required />
+              </label>
+              <label>
+                Address
+                <input name="address" type="text" autocomplete="street-address" required />
+              </label>
+              <div class="time-grid">
+                <label>
+                  Best time to be reached from
+                  <input name="bestTimeStart" type="time" step="900" required />
+                </label>
+                <label>
+                  Best time to be reached until
+                  <input name="bestTimeEnd" type="time" step="900" required />
+                </label>
+              </div>
+              <button class="button join-submit" type="submit">Get Claude updates</button>
+              <p class="form-status" aria-live="polite"></p>
+            </form>
+            <p class="join-privacy-note">
+              By continuing, you agree to the <a href="/privacy.html">Privacy Policy</a>
+              and to receive Claude product updates from this site.
+            </p>
+          </section>
         </section>
 
-        <section class="form-wrap">
-          <p class="card-kicker">Priority Signup</p>
-          <h2>Get on the Claude update list</h2>
-          <p class="lede">
-            Enter your contact details and preferred callback window. Include your
-            full address so we can route California or Georgia correctly.
-          </p>
-          <p class="fineprint">Example: `123 Main St, Atlanta, GA 30303` or `456 Pine Ave, Los Angeles, CA 90012`.</p>
-          <form class="lead-form">
-            <label>
-              Full name
-              <input name="name" type="text" autocomplete="name" required />
-            </label>
-            <label>
-              Email
-              <input name="email" type="email" autocomplete="email" required />
-            </label>
-            <label>
-              Mobile phone
-              <input name="phone" type="tel" autocomplete="tel" required />
-            </label>
-            <label>
-              Address
-              <input name="address" type="text" autocomplete="street-address" required />
-            </label>
-            <div class="time-grid">
-              <label>
-                Best time to be reached from
-                <input name="bestTimeStart" type="time" step="900" required />
-              </label>
-              <label>
-                Best time to be reached until
-                <input name="bestTimeEnd" type="time" step="900" required />
-              </label>
+        <aside class="join-preview glass" aria-label="Claude product preview">
+          <div class="join-preview-grid"></div>
+          <div class="join-preview-tabs">
+            <span>News</span>
+            <span class="is-active">Workflows</span>
+          </div>
+
+          <div class="join-preview-window">
+            <div class="join-search-bar">Search Claude updates</div>
+            <div class="join-preview-files">
+              <article class="join-file-card">
+                <span class="join-file-icon"></span>
+                <div>
+                  <strong>Model Notes</strong>
+                  <small>Opus, Sonnet, Haiku</small>
+                </div>
+              </article>
+              <article class="join-file-card">
+                <span class="join-file-icon"></span>
+                <div>
+                  <strong>Workflow Guides</strong>
+                  <small>Writing, code, research</small>
+                </div>
+              </article>
+              <article class="join-file-card">
+                <span class="join-file-icon"></span>
+                <div>
+                  <strong>Projects</strong>
+                  <small>Reusable Claude context</small>
+                </div>
+              </article>
+              <article class="join-file-card">
+                <span class="join-file-icon"></span>
+                <div>
+                  <strong>Artifacts</strong>
+                  <small>Output-focused breakdowns</small>
+                </div>
+              </article>
             </div>
-            <button class="button" type="submit">Get Claude updates</button>
-            <p class="form-status" aria-live="polite"></p>
-          </form>
-        </section>
+            <div class="join-preview-actions">
+              <span>Ignore</span>
+              <span class="join-open-pill">Open</span>
+            </div>
+          </div>
+
+          <div class="join-preview-bubble">
+            <span class="join-preview-burst" aria-hidden="true"></span>
+            <p>I can summarize the Claude launch notes and flag the workflow changes worth trying next.</p>
+          </div>
+
+          <div class="join-preview-sidecard">
+            <p class="join-sidecard-title">What you get</p>
+            <ul>
+              <li>Readable release notes</li>
+              <li>Claude Code coverage</li>
+              <li>Projects and Artifacts guides</li>
+              <li>Signal over generic AI noise</li>
+            </ul>
+          </div>
+        </aside>
       </section>
     </main>
-    <script src="/app.js?v=23"></script>
+    <script src="/app.js?v=24"></script>
   </body>
 </html>
