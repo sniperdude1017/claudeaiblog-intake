@@ -12,11 +12,24 @@ const TRACKING_KEYS = [
   "fbclid",
   "msclkid",
 ];
+const JOIN_PREVIEW_COPY = {
+  news: {
+    search: "Search Claude news",
+    caption: "Latest brief",
+    action: "Read now",
+  },
+  workflows: {
+    search: "Search Claude workflows",
+    caption: "Workflow guide",
+    action: "Open guide",
+  },
+};
 
 bootstrapTracking();
 captureAttributionSnapshot();
 handleThankYouPage();
 bindLeadForms();
+bindJoinPreview();
 
 function bindLeadForms() {
   const forms = document.querySelectorAll(".lead-form");
@@ -32,7 +45,7 @@ function bindLeadForms() {
 
       const formData = new FormData(form);
       const payload = {
-        segment: form.dataset.segment,
+        segment: form.dataset.segment || "consumer-us",
         name: formData.get("name"),
         email: formData.get("email"),
         phone: formData.get("phone"),
@@ -82,6 +95,122 @@ function bindLeadForms() {
       }
     });
   }
+}
+
+function bindJoinPreview() {
+  const preview = document.querySelector(".join-preview");
+  if (!preview) {
+    return;
+  }
+
+  const tabs = Array.from(preview.querySelectorAll("[data-preview-tab]"));
+  const panels = Array.from(preview.querySelectorAll("[data-preview-panel]"));
+  const bubblePanels = Array.from(preview.querySelectorAll("[data-preview-bubble]"));
+  const search = preview.querySelector("[data-preview-search]");
+  const caption = preview.querySelector("[data-preview-caption]");
+  const action = preview.querySelector("[data-preview-action]");
+
+  if (!tabs.length) {
+    return;
+  }
+
+  const activateTab = (tabName) => {
+    const activeTabName = JOIN_PREVIEW_COPY[tabName]
+      ? tabName
+      : tabs[0].dataset.previewTab;
+    const copy = JOIN_PREVIEW_COPY[activeTabName] || JOIN_PREVIEW_COPY.news;
+
+    for (const tab of tabs) {
+      const isActive = tab.dataset.previewTab === activeTabName;
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute("aria-selected", String(isActive));
+      tab.tabIndex = isActive ? 0 : -1;
+    }
+
+    for (const panel of panels) {
+      const isActive = panel.dataset.previewPanel === activeTabName;
+      panel.classList.toggle("is-active", isActive);
+      panel.hidden = !isActive;
+    }
+
+    for (const bubble of bubblePanels) {
+      bubble.hidden = bubble.dataset.previewBubble !== activeTabName;
+    }
+
+    if (search) search.textContent = copy.search;
+    if (caption) caption.textContent = copy.caption;
+    if (action) action.textContent = copy.action;
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      activateTab(tab.dataset.previewTab);
+    });
+
+    tab.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+        return;
+      }
+
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      const nextTab = tabs[(index + direction + tabs.length) % tabs.length];
+      nextTab.focus();
+      activateTab(nextTab.dataset.previewTab);
+    });
+  });
+
+  activateTab(
+    tabs.find((tab) => tab.classList.contains("is-active"))?.dataset.previewTab ||
+      tabs[0].dataset.previewTab
+  );
+  bindJoinPreviewMotion(preview);
+}
+
+function bindJoinPreviewMotion(preview) {
+  const setPointer = (x, y) => {
+    preview.style.setProperty("--join-pointer-x", x.toFixed(3));
+    preview.style.setProperty("--join-pointer-y", y.toFixed(3));
+  };
+
+  const updateScroll = () => {
+    const rect = preview.getBoundingClientRect();
+    const viewportHeight = Math.max(window.innerHeight || 0, 1);
+    const progress = Math.min(
+      Math.max((viewportHeight - rect.top) / (viewportHeight + rect.height), 0),
+      1
+    );
+    preview.style.setProperty("--join-scroll", ((progress - 0.5) * 2).toFixed(3));
+  };
+
+  updateScroll();
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    setPointer(0, 0);
+    return;
+  }
+
+  if (window.matchMedia("(pointer: fine)").matches) {
+    preview.addEventListener("pointermove", (event) => {
+      const rect = preview.getBoundingClientRect();
+      const x = Math.min(
+        Math.max(((event.clientX - rect.left) / rect.width) * 2 - 1, -1),
+        1
+      );
+      const y = Math.min(
+        Math.max(((event.clientY - rect.top) / rect.height) * 2 - 1, -1),
+        1
+      );
+      setPointer(x, y);
+    });
+
+    preview.addEventListener("pointerleave", () => {
+      setPointer(0, 0);
+    });
+  }
+
+  window.addEventListener("scroll", updateScroll, { passive: true });
+  window.addEventListener("resize", updateScroll);
 }
 
 function bootstrapTracking() {
@@ -337,14 +466,24 @@ function deriveSourceChannel(attribution) {
 }
 
 function stateFromSegment(segment) {
-  if (segment === "consumer-ca") return "CA";
-  if (segment === "consumer-ga") return "GA";
+  if (
+    segment === "consumer-us" ||
+    segment === "consumer-ca" ||
+    segment === "consumer-ga"
+  ) {
+    return "US";
+  }
   return "unknown";
 }
 
 function stateLabelFromSegment(segment) {
-  if (segment === "consumer-ca") return "California";
-  if (segment === "consumer-ga") return "Georgia";
+  if (
+    segment === "consumer-us" ||
+    segment === "consumer-ca" ||
+    segment === "consumer-ga"
+  ) {
+    return "U.S.";
+  }
   return "selected";
 }
 

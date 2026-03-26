@@ -32,6 +32,11 @@ const GA_MEASUREMENT_ID = cleanTrackingValue(
 );
 const META_PIXEL_ID = cleanTrackingValue(process.env.META_PIXEL_ID, 64);
 const THANK_YOU_PATH = "/thanks.html";
+const DEFAULT_SEGMENT = "consumer-us";
+const LEGACY_JOIN_PATHS = new Set([
+  "/consumer-ca.html",
+  "/consumer-ga.html",
+]);
 const CLIENT_CONFIG = {
   gtmContainerId: GTM_CONTAINER_ID,
   gaMeasurementId: GTM_CONTAINER_ID ? "" : GA_MEASUREMENT_ID,
@@ -45,8 +50,6 @@ const PUBLIC_PATHS = new Set([
   "/",
   "/index.html",
   "/join.html",
-  "/consumer-ca.html",
-  "/consumer-ga.html",
   "/thanks.html",
   "/privacy.html",
   "/config.js",
@@ -56,15 +59,10 @@ const PUBLIC_PATHS = new Set([
 ]);
 
 const segments = {
-  "consumer-ca": {
-    market: "California Consumer",
-    state: "CA",
-    title: "California Consumer Review Request",
-  },
-  "consumer-ga": {
-    market: "Georgia Consumer",
-    state: "GA",
-    title: "Georgia Consumer Review Request",
+  [DEFAULT_SEGMENT]: {
+    market: "United States Consumer",
+    state: "US",
+    title: "United States Consumer Review Request",
   },
 };
 
@@ -83,6 +81,10 @@ const server = http.createServer(async (req, res) => {
       200,
       `window.LEAD_SITE_CONFIG = ${JSON.stringify(CLIENT_CONFIG, null, 2)};\n`
     );
+  }
+
+  if (req.method === "GET" && LEGACY_JOIN_PATHS.has(url.pathname)) {
+    return redirect(res, "/join.html");
   }
 
   if (!isAuthorized(req)) {
@@ -302,10 +304,10 @@ function readBody(req) {
 function normalizeLead(payload, req, existingLeads) {
   const rawSegment = String(payload.segment || "").trim();
   const address = cleanText(payload.address, 160);
-  const segment = rawSegment || inferSegmentFromAddress(address);
+  const segment = normalizeSegment(rawSegment) || DEFAULT_SEGMENT;
   const segmentConfig = segments[segment];
   if (!segmentConfig) {
-    throw new Error("Address must include California or Georgia");
+    throw new Error("Lead routing is unavailable");
   }
 
   const now = new Date().toISOString();
@@ -411,14 +413,14 @@ function cleanTimeValue(value) {
   return text;
 }
 
-function inferSegmentFromAddress(address) {
-  const text = String(address || "").toLowerCase();
-  if (!text) return "";
-  if (/(^|[\s,])(ca|california)([\s,]|$)/.test(text)) {
-    return "consumer-ca";
-  }
-  if (/(^|[\s,])(ga|georgia)([\s,]|$)/.test(text)) {
-    return "consumer-ga";
+function normalizeSegment(value) {
+  const segment = String(value || "").trim().toLowerCase();
+  if (
+    segment === DEFAULT_SEGMENT ||
+    segment === "consumer-ca" ||
+    segment === "consumer-ga"
+  ) {
+    return DEFAULT_SEGMENT;
   }
   return "";
 }
@@ -759,6 +761,14 @@ function sendText(res, statusCode, body) {
     "Cache-Control": "no-store",
   });
   res.end(body);
+}
+
+function redirect(res, location) {
+  res.writeHead(302, {
+    Location: location,
+    "Cache-Control": "no-store",
+  });
+  res.end();
 }
 
 function sendJavaScript(res, statusCode, body) {
