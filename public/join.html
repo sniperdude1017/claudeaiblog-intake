@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>claudeaiblog.com | Get Claude Updates</title>
-    <script src="/config.js?v=24"></script>
-    <link rel="stylesheet" href="/styles.css?v=24" />
+    <script src="/config.js?v=25"></script>
+    <link rel="stylesheet" href="/styles.css?v=25" />
   </head>
   <body class="join-page">
     <main class="shell join-shell">
@@ -77,16 +77,27 @@
               </label>
               <label>
                 Address
-                <input name="address" type="text" autocomplete="street-address" required />
+                <input
+                  name="address"
+                  type="text"
+                  autocomplete="street-address"
+                  placeholder="Start typing your address"
+                  data-address-input
+                  required
+                />
               </label>
               <div class="time-grid">
                 <label>
                   Best time to be reached from
-                  <input name="bestTimeStart" type="time" step="900" required />
+                  <select name="bestTimeStart" data-time-select data-placeholder="Select start time" required>
+                    <option value="">Select start time</option>
+                  </select>
                 </label>
                 <label>
                   Best time to be reached until
-                  <input name="bestTimeEnd" type="time" step="900" required />
+                  <select name="bestTimeEnd" data-time-select data-placeholder="Select end time" required>
+                    <option value="">Select end time</option>
+                  </select>
                 </label>
               </div>
               <button class="button join-submit" type="submit">Get Claude updates</button>
@@ -262,6 +273,6 @@
         </div>
       </footer>
     </main>
-    <script src="/app.js?v=24"></script>
+    <script src="/app.js?v=25"></script>
   </body>
 </html>

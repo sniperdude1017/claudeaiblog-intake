@@ -4,73 +4,218 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Privacy Policy | claudeaiblog.com</title>
-    <link rel="stylesheet" href="/styles.css?v=24" />
+    <script src="/config.js?v=25"></script>
+    <link rel="stylesheet" href="/styles.css?v=25" />
   </head>
-  <body>
-    <main class="shell">
-      <section class="segment glass">
-        <p class="eyebrow">claudeaiblog.com</p>
-        <h1>Privacy Policy</h1>
-        <p class="lede">
-          We collect minimal contact info to deliver updates about Claude AI content and our own products. We do not sell your data.
-        </p>
+  <body class="join-page privacy-page">
+    <main class="shell join-shell privacy-shell">
+      <header class="join-nav">
+        <a class="join-brand" href="/">
+          <span class="join-brand-mark" aria-hidden="true">
+            <svg class="join-brand-logo" viewBox="0 0 24 24" role="presentation">
+              <rect x="10" y="3" width="4" height="2" />
+              <rect x="9" y="5" width="6" height="2" />
+              <rect x="8" y="7" width="8" height="2" />
+              <rect x="7" y="9" width="10" height="2" />
+              <rect x="6" y="11" width="12" height="2" />
+              <rect x="5" y="13" width="4" height="2" />
+              <rect x="15" y="13" width="4" height="2" />
+              <rect x="5" y="15" width="4" height="2" />
+              <rect x="15" y="15" width="4" height="2" />
+              <rect x="6" y="17" width="12" height="2" />
+              <rect x="8" y="19" width="2" height="2" />
+              <rect x="14" y="19" width="2" height="2" />
+            </svg>
+          </span>
+          <span class="join-brand-text">Claude AI Blog</span>
+        </a>
+        <nav class="join-menu" aria-label="Privacy page">
+          <a href="/">Home</a>
+          <a href="/join.html">Get updates</a>
+          <a href="https://www.anthropic.com/news" target="_blank" rel="noreferrer">Release Notes</a>
+          <a href="https://www.anthropic.com/claude" target="_blank" rel="noreferrer">Meet Claude</a>
+        </nav>
+        <div class="join-actions">
+          <a class="join-link-button" href="/">Back home</a>
+          <a class="join-primary-button" href="/join.html">Get updates</a>
+        </div>
+      </header>
+
+      <section class="privacy-hero glass">
+        <div class="privacy-hero-copy">
+          <p class="eyebrow">claudeaiblog.com</p>
+          <h1 class="join-title privacy-title">Privacy Policy</h1>
+          <p class="join-subtitle privacy-subtitle">
+            This page describes the information collected through
+            claudeaiblog.com, how that information is used, and the operational
+            systems that process signup and attribution data.
+          </p>
+        </div>
+        <div class="privacy-summary">
+          <article class="privacy-summary-card">
+            <p class="privacy-summary-label">Core data</p>
+            <p class="privacy-summary-value">Name, email, phone, address, callback window</p>
+          </article>
+          <article class="privacy-summary-card">
+            <p class="privacy-summary-label">Attribution data</p>
+            <p class="privacy-summary-value">Referrer, landing path, UTM tags, `gclid`, `fbclid`, `msclkid`</p>
+          </article>
+          <article class="privacy-summary-card">
+            <p class="privacy-summary-label">Last updated</p>
+            <p class="privacy-summary-value">March 26, 2026</p>
+          </article>
+        </div>
       </section>
 
-      <section class="segment glass">
-        <h2>Information We Collect</h2>
-        <p>Name, email, mobile number, address, best time to reach you, and basic campaign attribution fields.</p>
+      <section class="privacy-grid">
+        <section class="privacy-main">
+          <article class="privacy-card glass">
+            <p class="card-kicker">What We Collect</p>
+            <h2>Information submitted through the site</h2>
+            <p>
+              When you submit the Claude update form, the site collects the
+              fields currently present in that form: `name`, `email`, `phone`,
+              `address`, `best_time_start`, and `best_time_end`.
+            </p>
+            <p>
+              The site also records operational lead metadata used by the app,
+              including a generated lead ID, submission timestamp, follow-up
+              priority, routing lane, repeat-submission status, and webhook
+              delivery status.
+            </p>
+          </article>
+
+          <article class="privacy-card glass">
+            <p class="card-kicker">Attribution</p>
+            <h2>Traffic and campaign information</h2>
+            <p>
+              The site captures traffic source data from the page URL, browser
+              referrer, and landing session so submissions can be traced back to
+              the visit that produced them.
+            </p>
+            <ul>
+              <li>`landing_path` and `submission_path`</li>
+              <li>`referrer_url`</li>
+              <li>`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`</li>
+              <li>`gclid`, `fbclid`, `msclkid`</li>
+              <li>a generated `tracking_session_id` stored in browser storage</li>
+            </ul>
+          </article>
+
+          <article class="privacy-card glass">
+            <p class="card-kicker">Browser Storage</p>
+            <h2>Local and session storage used by the app</h2>
+            <p>
+              The client code stores attribution and conversion state in browser
+              `localStorage` and `sessionStorage` under app-specific keys so the
+              submitted lead can be associated with the current visit and thank-you
+              page flow.
+            </p>
+            <p>
+              The app is built to support Google Tag Manager, Google Analytics,
+              and Meta Pixel when those IDs are configured at runtime.
+            </p>
+            <p>
+              The address field is also built to support Google Maps Places
+              autocomplete when a Google Maps API key is configured for the site.
+            </p>
+          </article>
+
+          <article class="privacy-card glass">
+            <p class="card-kicker">How We Use It</p>
+            <h2>Operational uses of collected information</h2>
+            <ul>
+              <li>Send or prepare the Claude updates you requested.</li>
+              <li>Route and prioritize follow-up based on submitted lead details.</li>
+              <li>Measure campaign and landing-page performance.</li>
+              <li>Operate webhooks, notes exports, and internal lead workflows.</li>
+              <li>Maintain security, abuse monitoring, and system reliability.</li>
+            </ul>
+          </article>
+
+          <article class="privacy-card glass">
+            <p class="card-kicker">Sharing</p>
+            <h2>When information may leave this app</h2>
+            <p>
+              The app stores lead records in site-controlled operational files and
+              can forward lead data to a configured webhook endpoint. Data may
+              therefore be processed by hosting, infrastructure, analytics, and
+              automation providers used to run the site.
+            </p>
+            <p>
+              The site does not represent that it sells submitted lead data.
+              Information may also be disclosed when required by law or to protect
+              the service and its operator.
+            </p>
+          </article>
+
+          <article class="privacy-card glass">
+            <p class="card-kicker">Retention and Requests</p>
+            <h2>How long information is kept and how to contact us</h2>
+            <p>
+              Submitted information is kept for operational use, attribution
+              review, follow-up handling, records, and security review for as long
+              as reasonably needed for those purposes.
+            </p>
+            <p>
+              To request deletion or ask a privacy question, use the contact email
+              listed on this page and include enough detail to identify the
+              submission.
+            </p>
+          </article>
+        </section>
+
+        <aside class="privacy-side">
+          <article class="privacy-card glass">
+            <p class="card-kicker">Quick Facts</p>
+            <ul class="privacy-fact-list">
+              <li>No payment form is present on this site.</li>
+              <li>The current lead form is U.S.-wide.</li>
+              <li>Admin lead access is protected behind Basic Auth.</li>
+              <li>Lead data can be exported to notes files and webhook endpoints.</li>
+            </ul>
+          </article>
+
+          <article class="privacy-card glass">
+            <p class="card-kicker">Contact</p>
+            <p class="privacy-contact-line">
+              Email:
+              <a href="mailto:steven@clearsoultions.com">steven@clearsoultions.com</a>
+            </p>
+            <p class="privacy-contact-line">Company: Clear Solutions</p>
+            <p class="privacy-contact-line">Reference: Privacy Request</p>
+          </article>
+        </aside>
       </section>
 
-      <section class="segment glass">
-        <h2>How We Use It</h2>
-        <ul>
-          <li>Send the updates you request (email/SMS).</li>
-          <li>Operate and improve the site and waitlist.</li>
-          <li>Measure campaign performance using referral URLs, UTM parameters, and ad click IDs.</li>
-          <li>Prevent fraud and maintain security.</li>
-        </ul>
-      </section>
-
-      <section class="segment glass">
-        <h2>Sharing</h2>
-        <p>
-          We do not sell your data. We may use service providers (hosting, analytics, ad measurement, email/SMS) under confidentiality and data protection terms.
-          We may disclose if required by law or to protect our services.
-        </p>
-      </section>
-
-      <section class="segment glass">
-        <h2>Retention</h2>
-        <p>We keep your contact details only as long as needed for the purposes above or to comply with legal obligations.</p>
-      </section>
-
-      <section class="segment glass">
-        <h2>Your Choices</h2>
-        <ul>
-          <li>Opt out of SMS/email at any time via the messages you receive.</li>
-          <li>Request deletion of your contact data by emailing us.</li>
-        </ul>
-      </section>
-
-      <section class="segment glass">
-        <h2>Security</h2>
-        <p>We apply reasonable technical and organizational measures to protect your data. No system is 100% secure.</p>
-      </section>
-
-      <section class="segment glass">
-        <h2>Contact</h2>
-        <p>
-          Email: <a href="mailto:steven@clearsoultions.com">steven@clearsoultions.com</a><br />
-          Company: Clear Solutions<br />
-          Subject: “Privacy Request”
-        </p>
-      </section>
-
-      <section class="segment glass">
-        <p class="fineprint">Last updated: March 25, 2026</p>
-      </section>
+      <footer class="footer join-footer">
+        <div class="footer-left">
+          <p class="fineprint">Independent Claude AI commentary, launch tracking, and workflow coverage.</p>
+          <p class="fineprint">Contact: <a href="mailto:steven@clearsoultions.com">steven@clearsoultions.com</a></p>
+          <p class="fineprint footer-space">© 2026 claudeaiblog.com</p>
+        </div>
+        <div class="footer-right">
+          <a class="fineprint" href="/notes">Admin</a>
+          <span class="dot">•</span>
+          <a class="fineprint" href="/privacy.html">Privacy Policy</a>
+          <span class="dot">•</span>
+          <div class="socials">
+            <a aria-label="X" href="https://x.com/claudeai" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M4 4h3l5 6 5-6h3l-6.5 7.5L20 20h-3l-5-6-5 6H4l6.5-7.5z"/></svg>
+            </a>
+            <a aria-label="LinkedIn" href="https://www.linkedin.com/showcase/claude/" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6 1.12 6 0 4.88 0 3.5 0 2.12 1.12 1 2.5 1 3.88 1 4.98 2.12 4.98 3.5zM.22 23.5h4.56V7.98H.22V23.5zM8.66 7.98h4.37v2.12h.06c.61-1.16 2.1-2.38 4.32-2.38 4.62 0 5.47 3.04 5.47 6.98v8.8h-4.54v-7.8c0-1.86-.03-4.26-2.6-4.26-2.6 0-3 2.03-3 4.12v7.94H8.66V7.98z"/></svg>
+            </a>
+            <a aria-label="YouTube" href="https://www.youtube.com/@anthropic-ai" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M23.5 6.2s-.2-1.7-.9-2.4c-.8-.9-1.7-.9-2.1-1C17.4 2.5 12 2.5 12 2.5h0s-5.4 0-8.5.3c-.5.1-1.3.1-2.1 1C.7 4.5.5 6.2.5 6.2S.3 8 .3 9.7v1.6C.3 13 .5 14.8.5 14.8s.2 1.7.9 2.4c.8.9 1.9.9 2.4 1 1.8.2 7.2.3 7.2.3s5.4 0 8.5-.3c.5-.1 1.3-.1 2.1-1 .7-.7.9-2.4.9-2.4s.2-1.8.2-3.5V9.7c0-1.7-.2-3.5-.2-3.5zM9.8 13.9V7.8l5.8 3.1-5.8 3z"/></svg>
+            </a>
+            <a aria-label="Instagram" href="https://www.instagram.com/claudeai" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.3 2.4.6.6.3 1 .7 1.5 1.2.5.5.9.9 1.2 1.5.3.5.5 1.2.6 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.9-.6 2.4-.3.6-.7 1-1.2 1.5-.5.5-.9.9-1.5 1.2-.5.3-1.2.5-2.4.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.3-2.4-.6-.6-.3-1-.7-1.5-1.2-.5-.5-.9-.9-1.2-1.5-.3-.5-.5-1.2-.6-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.9.6-2.4.3-.6.7-1 1.2-1.5.5-.5.9-.9 1.5-1.2.5-.3 1.2-.5 2.4-.6C8.4 2.2 8.8 2.2 12 2.2m0-1.7C8.7.5 8.3.5 7 .6 5.7.7 4.8.9 4 .3c-.9.5-1.7 1.1-2.4 1.9C.9 3 .7 3.9.6 5.2.5 6.5.5 6.9.5 10.2v3.6c0 3.3 0 3.7.1 5 .1 1.3.3 2.2 1 3 .6.8 1.4 1.4 2.4 1.9.8.4 1.7.6 3 .7 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.3 3-.7.9-.5 1.7-1.1 2.4-1.9.7-.8.9-1.7 1-3 .1-1.3.1-1.7.1-5.1V10.2c0-3.3 0-3.7-.1-5-.1-1.3-.3-2.2-1-3-.6-.8-1.4-1.4-2.4-1.9-.8-.4-1.7-.6-3-.7C15.7.5 15.3.5 12 .5z"/><path fill="currentColor" d="M12 5.8A6.2 6.2 0 0 0 5.8 12 6.2 6.2 0 0 0 12 18.2 6.2 6.2 0 0 0 18.2 12 6.2 6.2 0 0 0 12 5.8m0 10.2A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle fill="currentColor" cx="18.4" cy="5.6" r="1.2"/></svg>
+            </a>
+          </div>
+        </div>
+      </footer>
     </main>
-    <script src="/config.js?v=24"></script>
-    <script src="/app.js?v=24"></script>
+    <script src="/app.js?v=25"></script>
   </body>
 </html>

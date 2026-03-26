@@ -1,9 +1,7 @@
 # Inbound Lead Intake
 
-This project provides a local, dependency-free inbound lead intake flow for:
-
-- California consumers
-- Georgia consumers
+This project now powers the public `claudeaiblog.com` landing pages and the
+U.S.-wide Claude update signup flow.
 
 It captures:
 
@@ -15,6 +13,21 @@ It captures:
 - `best_time_end`
 - landing/source attribution (`utm_*`, `gclid`, `fbclid`, `msclkid`, referrer, landing path)
 - automation fields (`priority`, `lead_score`, `routing_lane`, `follow_up_deadline`, repeat submission tracking)
+
+Current public pages:
+
+- `/`
+- `/join.html`
+- `/privacy.html`
+- `/thanks.html`
+
+Current behavior:
+
+- the join page is U.S.-wide
+- legacy `/consumer-ca.html` and `/consumer-ga.html` redirect to `/join.html`
+- time selection on the join page is generated from 15-minute dropdown options
+- the address field is wired for Google Maps Places autocomplete when `GOOGLE_MAPS_API_KEY` is configured
+- the homepage, join page, privacy page, and thank-you page share the same refreshed nav/footer system
 
 It stores submissions in ordered local files:
 
@@ -48,6 +61,7 @@ Then open:
 - `GTM_CONTAINER_ID`
 - `GA_MEASUREMENT_ID`
 - `META_PIXEL_ID`
+- `GOOGLE_MAPS_API_KEY`
 
 If `BASIC_AUTH_USERNAME` and `BASIC_AUTH_PASSWORD` are not set, the app falls back to the local credential file at `data/admin-credentials.json`.
 
@@ -72,6 +86,10 @@ Two automation paths are available without adding dependencies:
    - set `META_PIXEL_ID` if you want Meta Lead events from the thank-you page
    - the thank-you page is the clean conversion destination for paid traffic
 
+4. Optional address autocomplete
+   - set `GOOGLE_MAPS_API_KEY` to enable Google Maps Places autocomplete on the join-page address field
+   - the key is exposed to the browser through runtime config because Places autocomplete runs client-side
+
 Example webhook target types:
 
 - Make custom webhook
@@ -93,6 +111,7 @@ Recommended hosted settings:
 - optionally set `LEAD_WEBHOOK_TOKEN`
 - optionally set `GTM_CONTAINER_ID` or `GA_MEASUREMENT_ID`
 - optionally set `META_PIXEL_ID`
+- optionally set `GOOGLE_MAPS_API_KEY`
 
 Important:
 

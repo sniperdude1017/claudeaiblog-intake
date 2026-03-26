@@ -31,6 +31,10 @@ const GA_MEASUREMENT_ID = cleanTrackingValue(
   64
 );
 const META_PIXEL_ID = cleanTrackingValue(process.env.META_PIXEL_ID, 64);
+const GOOGLE_MAPS_API_KEY = cleanTrackingValue(
+  process.env.GOOGLE_MAPS_API_KEY,
+  160
+);
 const THANK_YOU_PATH = "/thanks.html";
 const DEFAULT_SEGMENT = "consumer-us";
 const LEGACY_JOIN_PATHS = new Set([
@@ -41,6 +45,7 @@ const CLIENT_CONFIG = {
   gtmContainerId: GTM_CONTAINER_ID,
   gaMeasurementId: GTM_CONTAINER_ID ? "" : GA_MEASUREMENT_ID,
   metaPixelId: META_PIXEL_ID,
+  googleMapsApiKey: GOOGLE_MAPS_API_KEY,
   thankYouPath: THANK_YOU_PATH,
 };
 const credentials = ensureCredentials();

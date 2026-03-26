@@ -4,45 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>claudeaiblog.com | Claude AI News, Guides & Product Notes</title>
-    <script src="/config.js?v=24"></script>
-    <link rel="stylesheet" href="/styles.css?v=24" />
+    <script src="/config.js?v=25"></script>
+    <link rel="stylesheet" href="/styles.css?v=25" />
   </head>
-  <body>
-    <main class="shell">
-      <div class="live-bg">
-        <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
-        <div class="grid-overlay" aria-hidden="true"></div>
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-      </div>
+  <body class="join-page home-page">
+    <main class="shell join-shell home-shell">
+      <header class="join-nav">
+        <a class="join-brand" href="/">
+          <span class="join-brand-mark" aria-hidden="true">
+            <svg class="join-brand-logo" viewBox="0 0 24 24" role="presentation">
+              <rect x="10" y="3" width="4" height="2" />
+              <rect x="9" y="5" width="6" height="2" />
+              <rect x="8" y="7" width="8" height="2" />
+              <rect x="7" y="9" width="10" height="2" />
+              <rect x="6" y="11" width="12" height="2" />
+              <rect x="5" y="13" width="4" height="2" />
+              <rect x="15" y="13" width="4" height="2" />
+              <rect x="5" y="15" width="4" height="2" />
+              <rect x="15" y="15" width="4" height="2" />
+              <rect x="6" y="17" width="12" height="2" />
+              <rect x="8" y="19" width="2" height="2" />
+              <rect x="14" y="19" width="2" height="2" />
+            </svg>
+          </span>
+          <span class="join-brand-text">Claude AI Blog</span>
+        </a>
+        <nav class="join-menu" aria-label="Home page">
+          <a href="/">Home</a>
+          <a href="/join.html">Get updates</a>
+          <a href="https://www.anthropic.com/claude" target="_blank" rel="noreferrer">Meet Claude</a>
+          <a href="https://www.anthropic.com/news" target="_blank" rel="noreferrer">Release Notes</a>
+          <a href="/privacy.html">Privacy</a>
+        </nav>
+        <div class="join-actions">
+          <a class="join-link-button" href="/privacy.html">Privacy</a>
+          <a class="join-primary-button" href="/join.html">Get updates</a>
+        </div>
+      </header>
 
-      <section class="split">
-        <div class="hero glass">
-          <header class="brand">
-            <div class="logo-mark" aria-hidden="true">
-              <svg class="claude-logo" viewBox="0 0 24 24" role="presentation">
-                <rect x="10" y="3" width="4" height="2" />
-                <rect x="9" y="5" width="6" height="2" />
-                <rect x="8" y="7" width="8" height="2" />
-                <rect x="7" y="9" width="10" height="2" />
-                <rect x="6" y="11" width="12" height="2" />
-                <rect x="5" y="13" width="4" height="2" />
-                <rect x="15" y="13" width="4" height="2" />
-                <rect x="5" y="15" width="4" height="2" />
-                <rect x="15" y="15" width="4" height="2" />
-                <rect x="6" y="17" width="12" height="2" />
-                <rect x="8" y="19" width="2" height="2" />
-                <rect x="14" y="19" width="2" height="2" />
-              </svg>
-            </div>
-            <div>
-              <p class="eyebrow">claudeaiblog.com</p>
-              <h1>Claude AI News, Guides &amp; Product Notes</h1>
-            </div>
-          </header>
-          <p class="lede">
-            Claude is Anthropic&apos;s AI for problem solvers. This site turns official Claude pages, Anthropic release posts, and product announcements into readable coverage of model launches, Claude Code, Projects, Artifacts, and the workflows people actually care about for writing, coding, research, and analysis.
+      <section class="home-hero-grid">
+        <section class="home-primary glass">
+          <p class="eyebrow">claudeaiblog.com</p>
+          <h1 class="join-title home-title">Claude AI news, guides, and product notes that are actually readable</h1>
+          <p class="join-subtitle home-subtitle">
+            Claude moves across models, coding, Projects, Artifacts, mobile,
+            desktop, and workflow changes. This site condenses the official
+            Claude and Anthropic updates into faster summaries, practical
+            takeaways, and cleaner follow-up paths.
           </p>
           <div class="topic-row" aria-label="Claude coverage areas">
             <span class="topic-pill">Opus, Sonnet, Haiku</span>
@@ -50,70 +58,109 @@
             <span class="topic-pill">Projects &amp; Artifacts</span>
             <span class="topic-pill">Research + analysis</span>
           </div>
-          <div class="cta-row">
+          <div class="home-button-row">
             <a class="button" href="/join.html">Get Claude updates</a>
+            <a class="join-link-button" href="https://www.anthropic.com/news" target="_blank" rel="noreferrer">Read Anthropic news</a>
           </div>
-          <p class="fineprint">Independent Claude coverage built from public Claude pages, official Anthropic news, and release notes instead of generic AI filler.</p>
           <div class="source-links">
             <a href="https://www.anthropic.com/claude" target="_blank" rel="noreferrer">Official Claude overview</a>
             <a href="https://www.anthropic.com/news" target="_blank" rel="noreferrer">Anthropic news</a>
+            <a href="/privacy.html">Privacy policy</a>
           </div>
-
-          <div class="metrics">
+          <div class="metrics home-metrics">
             <div class="metric">
-              <span class="metric-value">Opus / Sonnet / Haiku</span>
-              <span class="metric-label">Model family coverage with useful context</span>
+              <span class="metric-value">Model launches</span>
+              <span class="metric-label">Opus, Sonnet, and Haiku changes with context</span>
             </div>
             <div class="metric">
-              <span class="metric-value">Claude Code + Features</span>
-              <span class="metric-label">Projects, Artifacts, and product surface notes</span>
+              <span class="metric-value">Workflow coverage</span>
+              <span class="metric-label">Writing, coding, research, and analysis patterns</span>
             </div>
             <div class="metric">
-              <span class="metric-value">Real workflows</span>
-              <span class="metric-label">Writing, coding, research, and analysis</span>
+              <span class="metric-value">Feature tracking</span>
+              <span class="metric-label">Claude Code, Projects, Artifacts, and product shifts</span>
             </div>
           </div>
-        </div>
+        </section>
 
-        <aside class="card auth-card glass">
-          <p class="card-kicker">Why Follow Claude</p>
-          <h2>Track the product, not generic AI hype</h2>
-          <p>Claude is no longer just a chat window. Anthropic keeps expanding the product across models, coding, research, mobile, desktop, Projects, and Artifacts. The goal here is to make that motion easier to follow without drowning the page in vague AI commentary.</p>
-          <div class="status">
-            <p>What you&apos;ll get:</p>
+        <aside class="home-side glass">
+          <p class="card-kicker">Why Follow This</p>
+          <h2>Track the product without getting buried in generic AI noise</h2>
+          <p>
+            The site is built to follow what ships, what changes, and what is
+            worth trying next across the Claude product surface.
+          </p>
+          <div class="status home-status">
+            <p>What you get:</p>
             <ul>
-              <li>Model launch summaries with actual user-facing differences.</li>
-              <li>Feature notes on Claude Code, Projects, Artifacts, and interface shifts.</li>
-              <li>Source-backed examples for writing, coding, research, and analysis use cases.</li>
+              <li>Readable summaries of model launches and release notes.</li>
+              <li>Coverage of Claude Code, Projects, Artifacts, and interface changes.</li>
+              <li>Direct paths to join the update list, source material, and privacy details.</li>
             </ul>
+          </div>
+          <div class="home-link-stack">
+            <a class="join-link-button" href="/join.html">Open the signup page</a>
+            <a class="join-link-button" href="/privacy.html">Review privacy details</a>
           </div>
         </aside>
       </section>
 
-      <section class="feature-grid">
-        <article class="card">
+      <section class="home-feature-grid">
+        <article class="privacy-card glass">
           <p class="card-kicker">Model Watch</p>
           <h2>Follow Claude launches with context</h2>
-          <p>When Anthropic introduces a new Claude model, coverage centers on the practical differences: reasoning quality, coding strength, speed, fit for real tasks, and whether the update changes how people should use Claude day to day.</p>
+          <p>
+            When Anthropic introduces a new Claude model, coverage focuses on
+            reasoning quality, coding strength, speed, fit for real tasks, and
+            whether the update should change how people use Claude day to day.
+          </p>
         </article>
-        <article class="card">
+        <article class="privacy-card glass">
           <p class="card-kicker">Workflow Library</p>
           <h2>Writing, coding, research, and analysis</h2>
-          <p>Claude gets more interesting when it becomes repeatable. The site focuses on prompt structure, editing flows, research habits, code assistance, and practical ways to get stronger output from Claude without adding noise.</p>
+          <p>
+            Claude gets more useful when it becomes repeatable. The site tracks
+            prompt structure, editing flows, code assistance, research habits,
+            and practical ways to get stronger output with less noise.
+          </p>
         </article>
-        <article class="card">
+        <article class="privacy-card glass">
           <p class="card-kicker">Claude Ecosystem</p>
           <h2>Projects, Artifacts, Claude Code, and product shifts</h2>
-          <p>Some of the most important Claude changes are not only model releases. We also track the product surface around Claude, including Projects, Artifacts, Claude Code, interface changes, and feature updates that shape how the tool is used.</p>
+          <p>
+            Some of the most important Claude changes are not only model
+            releases. The site also follows Projects, Artifacts, Claude Code,
+            interface changes, and other feature updates that shape usage.
+          </p>
         </article>
-        <article class="card">
+        <article class="privacy-card glass">
           <p class="card-kicker">Source-Backed</p>
           <h2>Built from official Claude and Anthropic updates</h2>
-          <p>Coverage starts from public Claude product pages and Anthropic news posts, then translates that material into something faster to scan, easier to compare, and more useful for people deciding what to learn next.</p>
+          <p>
+            Coverage starts from public Claude product pages and Anthropic news
+            posts, then translates that material into something faster to scan,
+            easier to compare, and more useful to act on.
+          </p>
         </article>
       </section>
 
-      <footer class="footer">
+      <section class="home-cta glass">
+        <div>
+          <p class="card-kicker">Next Step</p>
+          <h2>Join the Claude update list</h2>
+          <p>
+            Use the U.S.-wide signup page to send your contact details, address,
+            and callback window. The form now supports guided time selection and
+            is ready for Google address autocomplete when the Maps key is enabled.
+          </p>
+        </div>
+        <div class="home-cta-actions">
+          <a class="button" href="/join.html">Go to signup</a>
+          <a class="join-link-button" href="/privacy.html">View privacy policy</a>
+        </div>
+      </section>
+
+      <footer class="footer join-footer">
         <div class="footer-left">
           <p class="fineprint">Independent Claude AI commentary, launch tracking, and workflow coverage.</p>
           <p class="fineprint">Contact: <a href="mailto:steven@clearsoultions.com">steven@clearsoultions.com</a></p>
@@ -141,91 +188,6 @@
         </div>
       </footer>
     </main>
-    <script src="/config.js?v=24"></script>
-    <script src="/app.js?v=24"></script>
-    <script>
-      (() => {
-        const canvas = document.getElementById("bg-canvas");
-        if (!canvas) return;
-        const prefersLiteMotion = window.matchMedia(
-          "(pointer: coarse), (prefers-reduced-motion: reduce), (max-width: 900px)"
-        ).matches;
-        if (prefersLiteMotion) {
-          canvas.style.display = "none";
-          return;
-        }
-        const ctx = canvas.getContext("2d");
-        let w = 0;
-        let h = 0;
-        let dpr = 1;
-        const particles = [];
-        const colors = ["rgba(255,138,0,0.65)", "rgba(255,94,58,0.55)", "rgba(255,138,0,0.35)"];
-        const COUNT = 32;
-        const pointer = { x: 0, y: 0 };
-
-        function resize() {
-          dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-          w = window.innerWidth;
-          h = window.innerHeight;
-          canvas.width = w * dpr;
-          canvas.height = h * dpr;
-          canvas.style.width = w + "px";
-          canvas.style.height = h + "px";
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-
-        function init() {
-          particles.length = 0;
-          for (let i = 0; i < COUNT; i++) {
-            particles.push({
-              x: Math.random() * w,
-              y: Math.random() * h,
-              r: 30 + Math.random() * 140,
-              dx: (Math.random() - 0.5) * 0.6,
-              dy: (Math.random() - 0.5) * 0.6,
-              z: 0.6 + Math.random() * 1.4,
-              c: colors[i % colors.length],
-            });
-          }
-        }
-
-        function step() {
-          ctx.clearRect(0, 0, w, h);
-          for (const p of particles) {
-            p.x += p.dx;
-            p.y += p.dy;
-            if (p.x < -p.r) p.x = w + p.r;
-            else if (p.x > w + p.r) p.x = -p.r;
-            if (p.y < -p.r) p.y = h + p.r;
-            else if (p.y > h + p.r) p.y = -p.r;
-
-            const parallax = 0.04;
-            const ox = ((pointer.x || w / 2) - w / 2) * parallax / p.z;
-            const oy = ((pointer.y || h / 2) - h / 2) * parallax / p.z;
-            const grad = ctx.createRadialGradient(p.x + ox, p.y + oy, p.r * 0.1, p.x + ox, p.y + oy, p.r);
-            grad.addColorStop(0, p.c);
-            grad.addColorStop(1, "rgba(0,0,0,0)");
-            ctx.fillStyle = grad;
-            ctx.beginPath();
-            ctx.arc(p.x + ox, p.y + oy, p.r, 0, Math.PI * 2);
-            ctx.fill();
-          }
-          requestAnimationFrame(step);
-        }
-
-        window.addEventListener("pointermove", (e) => {
-          pointer.x = e.clientX;
-          pointer.y = e.clientY;
-        });
-        window.addEventListener("resize", () => {
-          resize();
-          init();
-        });
-
-        resize();
-        init();
-        step();
-      })();
-    </script>
+    <script src="/app.js?v=25"></script>
   </body>
 </html>

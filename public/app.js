@@ -24,12 +24,23 @@ const JOIN_PREVIEW_COPY = {
     action: "Open guide",
   },
 };
+const TIME_OPTION_INTERVAL_MINUTES = 15;
+let googleMapsLoaderPromise = null;
 
 bootstrapTracking();
 captureAttributionSnapshot();
+enhanceLeadForms();
 handleThankYouPage();
 bindLeadForms();
 bindJoinPreview();
+
+function enhanceLeadForms() {
+  const forms = document.querySelectorAll(".lead-form");
+  for (const form of forms) {
+    populateLeadTimeSelects(form);
+    bindLeadAddressAutocomplete(form);
+  }
+}
 
 function bindLeadForms() {
   const forms = document.querySelectorAll(".lead-form");
@@ -95,6 +106,111 @@ function bindLeadForms() {
       }
     });
   }
+}
+
+function populateLeadTimeSelects(form) {
+  const selects = form.querySelectorAll("[data-time-select]");
+  for (const select of selects) {
+    if (!(select instanceof HTMLSelectElement) || select.options.length > 1) {
+      continue;
+    }
+
+    const placeholder = select.dataset.placeholder || "Select time";
+    select.innerHTML = "";
+    select.append(new Option(placeholder, ""));
+
+    for (
+      let minutesSinceMidnight = 0;
+      minutesSinceMidnight < 24 * 60;
+      minutesSinceMidnight += TIME_OPTION_INTERVAL_MINUTES
+    ) {
+      const hours = Math.floor(minutesSinceMidnight / 60);
+      const minutes = minutesSinceMidnight % 60;
+      const value = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+      select.append(new Option(formatTimeLabel(hours, minutes), value));
+    }
+  }
+}
+
+function formatTimeLabel(hours, minutes) {
+  const suffix = hours >= 12 ? "PM" : "AM";
+  const normalizedHour = hours % 12 || 12;
+  return `${normalizedHour}:${String(minutes).padStart(2, "0")} ${suffix}`;
+}
+
+async function bindLeadAddressAutocomplete(form) {
+  const input = form.querySelector("[data-address-input]");
+  if (!(input instanceof HTMLInputElement) || input.dataset.autocompleteBound === "true") {
+    return;
+  }
+
+  input.dataset.autocompleteBound = "true";
+  const apiKey = String(SITE_CONFIG.googleMapsApiKey || "").trim();
+  if (!apiKey) {
+    return;
+  }
+
+  try {
+    const google = await loadGoogleMapsPlaces(apiKey);
+    const autocomplete = new google.maps.places.Autocomplete(input, {
+      fields: ["formatted_address"],
+      componentRestrictions: { country: "us" },
+      types: ["address"],
+    });
+
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+      if (place && place.formatted_address) {
+        input.value = place.formatted_address;
+      }
+    });
+  } catch (error) {
+    console.warn("Address autocomplete failed to load", error);
+  }
+}
+
+function loadGoogleMapsPlaces(apiKey) {
+  if (window.google && window.google.maps && window.google.maps.places) {
+    return Promise.resolve(window.google);
+  }
+
+  if (googleMapsLoaderPromise) {
+    return googleMapsLoaderPromise;
+  }
+
+  googleMapsLoaderPromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector('script[data-google-maps-loader="true"]');
+    if (existing) {
+      existing.addEventListener("load", () => resolve(window.google), { once: true });
+      existing.addEventListener("error", () => reject(new Error("Google Maps failed to load")), {
+        once: true,
+      });
+      return;
+    }
+
+    const callbackName = "__leadSiteGoogleMapsReady";
+    window[callbackName] = () => {
+      delete window[callbackName];
+      resolve(window.google);
+    };
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.defer = true;
+    script.dataset.googleMapsLoader = "true";
+    script.src =
+      "https://maps.googleapis.com/maps/api/js" +
+      `?key=${encodeURIComponent(apiKey)}` +
+      "&libraries=places" +
+      `&callback=${encodeURIComponent(callbackName)}`;
+    script.addEventListener("error", () => {
+      delete window[callbackName];
+      reject(new Error("Google Maps failed to load"));
+    });
+    document.head.appendChild(script);
+  });
+
+  return googleMapsLoaderPromise;
 }
 
 function bindJoinPreview() {
