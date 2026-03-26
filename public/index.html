@@ -2,28 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- v=6 cache-bust -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>claudeaiblog.com | Claude AI Requests</title>
-    <!-- GTM / GA real IDs -->
-    <script>
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-XXXX');
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXX');
-    </script>
-    <link rel="stylesheet" href="/styles.css?v=4" />
+    <script src="/config.js"></script>
+    <link rel="stylesheet" href="/styles.css?v=18" />
   </head>
   <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <main class="shell">
       <div class="live-bg">
         <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
@@ -58,7 +42,6 @@
         </div>
         <div class="nav-actions">
           <a class="link-ghost" href="/privacy.html">Privacy</a>
-          <a class="button" href="/consumer-ca.html">Join waitlist</a>
         </div>
       </header>
 
@@ -87,10 +70,10 @@
             </div>
           </header>
           <p class="lede">
-            Desktop-first experience with live, layered wallpaper and glass UI. Get early updates, workflow drops, and waitlist access with verified email + mobile—no logins required.
+            Desktop-first experience with live, layered wallpaper and glass UI. Get early updates, workflow drops, and waitlist access with your full contact details and preferred callback window.
           </p>
           <div class="cta-row">
-            <a class="button" href="/consumer-ca.html">Join waitlist</a>
+            <a class="button" href="/join.html">Join waitlist</a>
           </div>
           <p class="fineprint">General informational use. Opt-out anytime.</p>
 
@@ -101,7 +84,7 @@
             </div>
             <div class="metric">
               <span class="metric-value">2x</span>
-              <span class="metric-label">Faster updates vs email-only</span>
+              <span class="metric-label">Cleaner callback scheduling</span>
             </div>
             <div class="metric">
               <span class="metric-value">Zero</span>
@@ -112,16 +95,13 @@
 
         <aside class="card auth-card glass">
           <p class="card-kicker">Fast access</p>
-          <h2>Get updates as we ship</h2>
-          <p>Join the waitlist with verified email and mobile. Phone ownership attestation required.</p>
-          <div class="stacked-links">
-            <a class="button" href="/consumer-ca.html">Join waitlist</a>
-          </div>
+          <h2>One clear signup path</h2>
+          <p>The homepage now stays focused on a single waitlist action. State-specific campaigns should link directly to the matching intake page instead of relying on homepage branching.</p>
           <div class="status">
             <p>What to expect:</p>
             <ul>
               <li>Short release notes and workflows.</li>
-              <li>SMS/email invites for new drops.</li>
+              <li>Faster follow-up with a preferred callback window.</li>
               <li>One-click opt-out anytime.</li>
             </ul>
           </div>
@@ -174,6 +154,8 @@
         </div>
       </footer>
     </main>
+    <script src="/config.js?v=18"></script>
+    <script src="/app.js?v=18"></script>
     <script>
       (() => {
         const canvas = document.getElementById("bg-canvas");

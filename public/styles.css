@@ -1,13 +1,14 @@
 :root {
-  --bg: #0b0b0c;
-  --panel: rgba(16, 14, 12, 0.65);
-  --ink: #fdf7f2;
-  --muted: #c8c2ba;
-  --line: rgba(255, 255, 255, 0.12);
+  --bg: #0f1116;
+  --panel: rgba(255, 255, 255, 0.12);
+  --panel-strong: rgba(255, 255, 255, 0.18);
+  --ink: #fffaf6;
+  --muted: rgba(255, 244, 236, 0.78);
+  --line: rgba(255, 255, 255, 0.22);
   --orange: #ff8a00;
   --orange-dark: #ff5e3a;
   --red: #ff6b6b;
-  --shadow: 0 32px 140px rgba(0, 0, 0, 0.7);
+  --shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
   /* Official Brand Palette */
   --claude-primary: #c15f3c; /* Crail (Terracotta Orange) */
   --claude-bg: #f4f3ee;      /* Pampas (Warm Off-White) */
@@ -17,6 +18,7 @@
 
 html {
   -webkit-font-smoothing: antialiased;
+  background: transparent;
 }
 
 * {
@@ -30,10 +32,13 @@ body {
   font-family: "Space Grotesk", "Sora", "Inter", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at 18% 18%, rgba(255, 138, 0, 0.16), transparent 28%),
-    radial-gradient(circle at 80% 0%, rgba(255, 94, 58, 0.2), transparent 26%),
-    linear-gradient(160deg, #0e0d10, #0a0a0c 52%, #050506);
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.18), transparent 24%),
+    radial-gradient(circle at 82% 4%, rgba(255, 138, 0, 0.2), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(255, 94, 58, 0.18), transparent 28%),
+    linear-gradient(180deg, rgba(18, 20, 28, 0.72), rgba(8, 10, 16, 0.54));
   min-height: 100vh;
+  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 a {
@@ -43,7 +48,7 @@ a {
 .shell {
   width: min(1200px, calc(100vw - 48px));
   margin: 0 auto;
-  padding: 32px 0 64px;
+  padding: calc(24px + env(safe-area-inset-top, 0px)) 0 calc(64px + env(safe-area-inset-bottom, 0px));
   position: relative;
   z-index: 1;
 }
@@ -64,20 +69,20 @@ a {
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.82;
-  filter: saturate(120%);
+  opacity: 0.7;
+  filter: saturate(118%);
 }
 
 .grid-overlay {
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 138, 0, 0.08), transparent 40%),
-    radial-gradient(circle at 80% 40%, rgba(255, 94, 58, 0.08), transparent 42%),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 32px),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 32px);
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 40%, rgba(125, 210, 255, 0.08), transparent 42%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.045) 1px, transparent 1px, transparent 32px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.045) 1px, transparent 1px, transparent 32px);
   mix-blend-mode: normal;
-  opacity: 0.35;
+  opacity: 0.28;
 }
 
 .bg-canvas,
@@ -93,7 +98,7 @@ a {
   height: 520px;
   border-radius: 50%;
   filter: blur(40px);
-  opacity: 0.32;
+  opacity: 0.2;
   background: radial-gradient(circle at 30% 30%, rgba(255, 138, 0, 0.8), transparent 65%);
   animation: drift 16s ease-in-out infinite alternate;
 }
@@ -149,11 +154,12 @@ a {
 .form-wrap,
 .status,
 .card {
-  background: linear-gradient(165deg, rgba(18, 16, 14, 0.68), rgba(10, 9, 8, 0.6));
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+  border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow: var(--shadow);
   border-radius: 20px;
-  backdrop-filter: blur(18px) saturate(125%);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -167,7 +173,7 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.04), transparent 42%);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.22), transparent 48%);
   pointer-events: none;
 }
 
@@ -202,10 +208,11 @@ a {
   justify-content: space-between;
   padding: 16px 20px;
   border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   margin-bottom: 18px;
-  background: linear-gradient(160deg, rgba(23, 18, 18, 0.85), rgba(15, 12, 12, 0.82));
-  backdrop-filter: blur(12px);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
   position: relative;
   z-index: 2;
 }
@@ -233,8 +240,8 @@ a {
   text-decoration: none;
   padding: 10px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .link-ghost:hover {
@@ -304,8 +311,8 @@ label {
 .metric {
   padding: 12px 14px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .metric-value {
@@ -345,23 +352,38 @@ label {
 
 .button {
   display: inline-block;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 999px;
   padding: 14px 20px;
-  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  background: linear-gradient(135deg, rgba(255, 138, 0, 0.92), rgba(255, 94, 58, 0.88));
   color: #fff;
   text-decoration: none;
   font-weight: 700;
   cursor: pointer;
+  box-shadow:
+    0 14px 34px rgba(255, 94, 58, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.button:disabled {
+  opacity: 0.68;
+  cursor: wait;
 }
 
 .button.ghost {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--line);
+  color: var(--ink);
 }
 
 .lead-form {
   display: grid;
+  gap: 16px;
+}
+
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -376,10 +398,12 @@ input {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 14px 16px;
-  background: rgba(20, 18, 18, 0.6);
+  background: rgba(255, 255, 255, 0.12);
   font: inherit;
   color: var(--ink);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .checkbox {
@@ -439,8 +463,9 @@ input {
 }
 
 .glass {
-  backdrop-filter: blur(10px);
-  background: linear-gradient(160deg, rgba(23, 18, 18, 0.85), rgba(15, 12, 12, 0.82));
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
 }
 
 .fineprint {
@@ -543,7 +568,7 @@ input {
 @media (max-width: 640px) {
   .shell {
     width: min(100vw - 20px, 960px);
-    padding-top: 20px;
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
   }
 
   .hero,
@@ -562,5 +587,9 @@ input {
   .hero,
   .auth-card {
     max-width: 100%;
+  }
+
+  .time-grid {
+    grid-template-columns: 1fr;
   }
 }

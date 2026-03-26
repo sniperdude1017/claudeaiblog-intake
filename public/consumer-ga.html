@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>claudeaiblog.com | Claude AI Georgia</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <script src="/config.js?v=18"></script>
+    <link rel="stylesheet" href="/styles.css?v=18" />
   </head>
   <body>
     <main class="shell">
@@ -12,8 +13,8 @@
         <p class="eyebrow">claudeaiblog.com | Georgia</p>
         <h1>Claude AI waitlist — Georgia</h1>
         <p class="lede">
-          Join the Claude AI blog waitlist for Georgia readers. You’ll get
-          email/SMS updates; phone ownership attestation is required.
+          Join the Claude AI blog waitlist for Georgia readers. Share your
+          contact details and the best time to reach you.
         </p>
         <p class="fineprint">General informational use.</p>
       </section>
@@ -32,26 +33,24 @@
             <input name="phone" type="tel" autocomplete="tel" required />
           </label>
           <label>
-            City
-            <input name="city" type="text" autocomplete="address-level2" required />
+            Address
+            <input name="address" type="text" autocomplete="street-address" required />
           </label>
-          <label>
-            Georgia ZIP code
-            <input name="zip" type="text" inputmode="numeric" required />
-          </label>
-          <label class="checkbox">
-            <input name="ownsPhone" type="checkbox" required />
-            I confirm this mobile number belongs to me and I can receive texts on it.
-          </label>
-          <label class="checkbox">
-            <input name="consent" type="checkbox" required />
-            I agree to receive email and SMS updates about this waitlist.
-          </label>
+          <div class="time-grid">
+            <label>
+              Best time to be reached from
+              <input name="bestTimeStart" type="time" step="900" required />
+            </label>
+            <label>
+              Best time to be reached until
+              <input name="bestTimeEnd" type="time" step="900" required />
+            </label>
+          </div>
           <button class="button" type="submit">Join waitlist</button>
           <p class="form-status" aria-live="polite"></p>
         </form>
       </section>
     </main>
-    <script src="/app.js"></script>
+    <script src="/app.js?v=18"></script>
   </body>
 </html>

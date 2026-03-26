@@ -10,15 +10,18 @@ It captures:
 - `name`
 - `email`
 - `phone`
-- `ZIP`
-- phone ownership attestation
-- explicit consent for email and SMS follow-up
+- `address`
+- `best_time_start`
+- `best_time_end`
+- landing/source attribution (`utm_*`, `gclid`, `fbclid`, `msclkid`, referrer, landing path)
+- automation fields (`priority`, `lead_score`, `routing_lane`, `follow_up_deadline`, repeat submission tracking)
 
 It stores submissions in ordered local files:
 
 - `data/leads.json`
 - `data/leads.csv`
 - `data/notes-export.txt`
+- `data/webhook-queue.ndjson` when webhook delivery fails
 
 ## Run locally
 
@@ -39,8 +42,42 @@ Then open:
 - `ALLOW_LEAD_READS`
 - `BASIC_AUTH_USERNAME`
 - `BASIC_AUTH_PASSWORD`
+- `LEAD_WEBHOOK_URL`
+- `LEAD_WEBHOOK_TOKEN`
+- `LEAD_WEBHOOK_TIMEOUT_MS`
+- `GTM_CONTAINER_ID`
+- `GA_MEASUREMENT_ID`
+- `META_PIXEL_ID`
 
 If `BASIC_AUTH_USERNAME` and `BASIC_AUTH_PASSWORD` are not set, the app falls back to the local credential file at `data/admin-credentials.json`.
+
+## Automation hooks
+
+The website now keeps ad/source attribution attached to the lead all the way from the landing page to the form submit. That gives you workable routing data instead of anonymous form fills.
+
+Two automation paths are available without adding dependencies:
+
+1. Existing notes pipeline
+   - new leads are still written to `data/notes-export.txt`
+   - your existing `/notes` -> `save-live-leads.sh` -> `forward-leads.sh` Telegram flow keeps working
+   - the note lines now include priority, routing lane, follow-up deadline, source attribution, and repeat-submission markers
+
+2. Direct webhook routing
+   - set `LEAD_WEBHOOK_URL` to a Make, Zapier, n8n, Slack, or custom HTTPS endpoint
+   - optionally set `LEAD_WEBHOOK_TOKEN` for bearer auth
+   - if delivery fails, the event is queued into `data/webhook-queue.ndjson` instead of being dropped
+
+3. Optional conversion tracking
+   - set `GTM_CONTAINER_ID` or `GA_MEASUREMENT_ID` to enable browser tracking from runtime config
+   - set `META_PIXEL_ID` if you want Meta Lead events from the thank-you page
+   - the thank-you page is the clean conversion destination for paid traffic
+
+Example webhook target types:
+
+- Make custom webhook
+- Zapier catch hook
+- n8n webhook trigger
+- your own CRM/ops endpoint
 
 ## Simple hosting
 
@@ -52,6 +89,10 @@ Recommended hosted settings:
 - `DATA_DIR=/var/data`
 - set both basic auth env vars in the Render dashboard
 - keep `ALLOW_LEAD_READS=false`
+- set `LEAD_WEBHOOK_URL` if you want direct lead routing
+- optionally set `LEAD_WEBHOOK_TOKEN`
+- optionally set `GTM_CONTAINER_ID` or `GA_MEASUREMENT_ID`
+- optionally set `META_PIXEL_ID`
 
 Important:
 
@@ -63,5 +104,5 @@ Important:
 
 - This is an inbound-only capture system.
 - It does not source or scrape consumer contact data.
-- It does not verify phone ownership beyond self-attestation. Carrier or OTP verification would require an SMS provider.
+- It does not verify phone ownership. Carrier or OTP verification would require an SMS provider.
 - The notes export remains ordered by submission timestamp.

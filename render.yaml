@@ -17,6 +17,18 @@ services:
         sync: false
       - key: ALLOW_LEAD_READS
         value: "false"
+      - key: LEAD_WEBHOOK_URL
+        sync: false
+      - key: LEAD_WEBHOOK_TOKEN
+        sync: false
+      - key: LEAD_WEBHOOK_TIMEOUT_MS
+        value: "4000"
+      - key: GTM_CONTAINER_ID
+        sync: false
+      - key: GA_MEASUREMENT_ID
+        sync: false
+      - key: META_PIXEL_ID
+        sync: false
     disk:
       name: inbound-data
       mountPath: /var/data
