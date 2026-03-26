@@ -420,11 +420,7 @@ function cleanTimeValue(value) {
 
 function normalizeSegment(value) {
   const segment = String(value || "").trim().toLowerCase();
-  if (
-    segment === DEFAULT_SEGMENT ||
-    segment === "consumer-ca" ||
-    segment === "consumer-ga"
-  ) {
+  if (segment === DEFAULT_SEGMENT || /^consumer-[a-z]{2}$/.test(segment)) {
     return DEFAULT_SEGMENT;
   }
   return "";

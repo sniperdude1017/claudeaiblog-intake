@@ -582,22 +582,16 @@ function deriveSourceChannel(attribution) {
 }
 
 function stateFromSegment(segment) {
-  if (
-    segment === "consumer-us" ||
-    segment === "consumer-ca" ||
-    segment === "consumer-ga"
-  ) {
+  const normalized = String(segment || "").trim().toLowerCase();
+  if (normalized === "consumer-us" || /^consumer-[a-z]{2}$/.test(normalized)) {
     return "US";
   }
   return "unknown";
 }
 
 function stateLabelFromSegment(segment) {
-  if (
-    segment === "consumer-us" ||
-    segment === "consumer-ca" ||
-    segment === "consumer-ga"
-  ) {
+  const normalized = String(segment || "").trim().toLowerCase();
+  if (normalized === "consumer-us" || /^consumer-[a-z]{2}$/.test(normalized)) {
     return "U.S.";
   }
   return "selected";
