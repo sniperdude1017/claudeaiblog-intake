@@ -583,7 +583,7 @@ function deriveSourceChannel(attribution) {
 
 function stateFromSegment(segment) {
   const normalized = String(segment || "").trim().toLowerCase();
-  if (normalized === "consumer-us" || /^consumer-[a-z]{2}$/.test(normalized)) {
+  if (normalized === "consumer-us") {
     return "US";
   }
   return "unknown";
@@ -591,7 +591,7 @@ function stateFromSegment(segment) {
 
 function stateLabelFromSegment(segment) {
   const normalized = String(segment || "").trim().toLowerCase();
-  if (normalized === "consumer-us" || /^consumer-[a-z]{2}$/.test(normalized)) {
+  if (normalized === "consumer-us") {
     return "U.S.";
   }
   return "selected";
