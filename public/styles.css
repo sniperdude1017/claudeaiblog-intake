@@ -1,14 +1,14 @@
 :root {
-  --bg: #0f1116;
-  --panel: rgba(255, 255, 255, 0.12);
-  --panel-strong: rgba(255, 255, 255, 0.18);
+  --bg: #0e1218;
+  --panel: rgba(20, 24, 31, 0.56);
+  --panel-strong: rgba(20, 24, 31, 0.66);
   --ink: #fffaf6;
-  --muted: rgba(255, 244, 236, 0.78);
-  --line: rgba(255, 255, 255, 0.22);
+  --muted: rgba(255, 245, 238, 0.86);
+  --line: rgba(255, 255, 255, 0.16);
   --orange: #ff8a00;
   --orange-dark: #ff5e3a;
   --red: #ff6b6b;
-  --shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
   /* Official Brand Palette */
   --claude-primary: #c15f3c; /* Crail (Terracotta Orange) */
   --claude-bg: #f4f3ee;      /* Pampas (Warm Off-White) */
@@ -32,12 +32,12 @@ body {
   font-family: "Space Grotesk", "Sora", "Inter", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.18), transparent 24%),
-    radial-gradient(circle at 82% 4%, rgba(255, 138, 0, 0.2), transparent 24%),
-    radial-gradient(circle at 50% 100%, rgba(255, 94, 58, 0.18), transparent 28%),
-    linear-gradient(180deg, rgba(18, 20, 28, 0.72), rgba(8, 10, 16, 0.54));
+    radial-gradient(circle at 18% 18%, rgba(255, 193, 130, 0.12), transparent 22%),
+    radial-gradient(circle at 82% 4%, rgba(255, 138, 0, 0.14), transparent 22%),
+    radial-gradient(circle at 50% 100%, rgba(255, 94, 58, 0.1), transparent 26%),
+    linear-gradient(180deg, rgba(15, 18, 26, 0.92), rgba(8, 10, 16, 0.9));
   min-height: 100vh;
-  background-attachment: fixed;
+  background-attachment: scroll;
   overflow-x: hidden;
 }
 
@@ -69,20 +69,20 @@ a {
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.7;
-  filter: saturate(118%);
+  opacity: 0.46;
+  filter: saturate(108%);
 }
 
 .grid-overlay {
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 40%),
-    radial-gradient(circle at 80% 40%, rgba(125, 210, 255, 0.08), transparent 42%),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.045) 1px, transparent 1px, transparent 32px),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.045) 1px, transparent 1px, transparent 32px);
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.04), transparent 40%),
+    radial-gradient(circle at 80% 40%, rgba(125, 210, 255, 0.05), transparent 42%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.025) 1px, transparent 1px, transparent 32px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.025) 1px, transparent 1px, transparent 32px);
   mix-blend-mode: normal;
-  opacity: 0.28;
+  opacity: 0.14;
 }
 
 .bg-canvas,
@@ -98,7 +98,7 @@ a {
   height: 520px;
   border-radius: 50%;
   filter: blur(40px);
-  opacity: 0.2;
+  opacity: 0.12;
   background: radial-gradient(circle at 30% 30%, rgba(255, 138, 0, 0.8), transparent 65%);
   animation: drift 16s ease-in-out infinite alternate;
 }
@@ -154,12 +154,12 @@ a {
 .form-wrap,
 .status,
 .card {
-  background: linear-gradient(165deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(165deg, rgba(23, 27, 35, 0.72), rgba(16, 19, 26, 0.62));
+  border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: var(--shadow);
   border-radius: 20px;
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -173,7 +173,7 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.22), transparent 48%);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 46%);
   pointer-events: none;
 }
 
@@ -208,11 +208,11 @@ a {
   justify-content: space-between;
   padding: 16px 20px;
   border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   margin-bottom: 18px;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.1));
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: linear-gradient(160deg, rgba(23, 27, 35, 0.72), rgba(16, 19, 26, 0.62));
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
   position: relative;
   z-index: 2;
 }
@@ -240,8 +240,8 @@ a {
   text-decoration: none;
   padding: 10px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .link-ghost:hover {
@@ -262,6 +262,7 @@ h1,
 h2 {
   margin: 0 0 10px;
   line-height: 1.05;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.24);
 }
 
 h1 {
@@ -275,7 +276,13 @@ h2 {
 
 .lede,
 .card p,
-.status p,
+.status p {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: rgba(255, 250, 245, 0.96);
+  font-weight: 500;
+}
+
 label {
   font-size: 1.02rem;
   line-height: 1.6;
@@ -311,8 +318,8 @@ label {
 .metric {
   padding: 12px 14px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(10, 12, 18, 0.34);
 }
 
 .metric-value {
@@ -323,8 +330,9 @@ label {
 }
 
 .metric-label {
-  color: var(--muted);
+  color: rgba(255, 245, 236, 0.9);
   font-size: 0.92rem;
+  line-height: 1.35;
 }
 
 .card,
@@ -336,6 +344,7 @@ label {
 .status {
   margin-top: 16px;
   margin-bottom: 14px;
+  background: linear-gradient(165deg, rgba(16, 19, 25, 0.78), rgba(12, 15, 20, 0.7));
 }
 
 .cta-row {
@@ -371,7 +380,7 @@ label {
 }
 
 .button.ghost {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--line);
   color: var(--ink);
 }
@@ -398,11 +407,11 @@ input {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(10, 12, 18, 0.42);
   font: inherit;
   color: var(--ink);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
@@ -463,9 +472,9 @@ input {
 }
 
 .glass {
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  background: linear-gradient(160deg, rgba(23, 27, 35, 0.72), rgba(16, 19, 26, 0.62));
 }
 
 .fineprint {
@@ -550,6 +559,37 @@ input {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+}
+
+@media (pointer: coarse), (max-width: 900px) {
+  .bg-canvas,
+  .orb {
+    display: none;
+  }
+
+  .grid-overlay {
+    opacity: 0.08;
+  }
+
+  .hero,
+  .segment,
+  .form-wrap,
+  .status,
+  .card,
+  .topbar,
+  .glass,
+  input {
+    backdrop-filter: blur(14px) saturate(125%);
+    -webkit-backdrop-filter: blur(14px) saturate(125%);
+  }
+
+  .hero,
+  .segment,
+  .form-wrap,
+  .status,
+  .card {
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
   }
 }
 
