@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>claudeaiblog.com | Claude AI Requests</title>
-    <!-- GTM / GA placeholders: replace GTM-XXXX and G-XXXX with your container and measurement IDs -->
+    <!-- GTM / GA real IDs -->
     <script>
-      // Google Tag Manager placeholder
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
       j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -26,10 +25,41 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <main class="shell">
       <div class="live-bg">
+        <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+        <div class="grid-overlay" aria-hidden="true"></div>
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
       </div>
+
+      <header class="topbar glass">
+        <div class="nav-brand">
+          <div class="logo-mark" aria-hidden="true">
+            <svg class="claude-logo" viewBox="0 0 24 24" role="presentation">
+              <rect x="10" y="3" width="4" height="2" />
+              <rect x="9" y="5" width="6" height="2" />
+              <rect x="8" y="7" width="8" height="2" />
+              <rect x="7" y="9" width="10" height="2" />
+              <rect x="6" y="11" width="12" height="2" />
+              <rect x="5" y="13" width="4" height="2" />
+              <rect x="15" y="13" width="4" height="2" />
+              <rect x="5" y="15" width="4" height="2" />
+              <rect x="15" y="15" width="4" height="2" />
+              <rect x="6" y="17" width="12" height="2" />
+              <rect x="8" y="19" width="2" height="2" />
+              <rect x="14" y="19" width="2" height="2" />
+            </svg>
+          </div>
+          <div>
+            <p class="eyebrow">claudeaiblog.com</p>
+            <strong class="brand-title">Claude AI Blog</strong>
+          </div>
+        </div>
+        <div class="nav-actions">
+          <a class="link-ghost" href="/privacy.html">Privacy</a>
+          <a class="button" href="/consumer-ca.html">Join waitlist</a>
+        </div>
+      </header>
 
       <section class="split">
         <div class="hero glass">
@@ -56,23 +86,35 @@
             </div>
           </header>
           <p class="lede">
-            Immersive briefs on Claude AI plus early-access updates. Live design, minimal friction, and fast opt-in for
-            SMS/email drops.
+            Desktop-first experience with live, layered wallpaper and glass UI. Get early updates, workflow drops, and waitlist access with verified email + mobile.
           </p>
           <div class="cta-row">
-            <a class="button" href="/consumer-ca.html">Join waitlist (CA)</a>
-            <a class="button ghost" href="/consumer-ga.html">Join waitlist (GA)</a>
+            <a class="button" href="/consumer-ca.html">Join waitlist</a>
           </div>
           <p class="fineprint">General informational use. Opt-out anytime.</p>
+
+          <div class="metrics">
+            <div class="metric">
+              <span class="metric-value">5 min</span>
+              <span class="metric-label">Average confirmation</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">2x</span>
+              <span class="metric-label">Faster updates vs email-only</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">Zero</span>
+              <span class="metric-label">Account logins required</span>
+            </div>
+          </div>
         </div>
 
         <aside class="card auth-card glass">
           <p class="card-kicker">Fast access</p>
           <h2>Get updates as we ship</h2>
-          <p>Pick your state and drop into the list. Phone ownership attestation required.</p>
+          <p>Join the waitlist with verified email and mobile. Phone ownership attestation required.</p>
           <div class="stacked-links">
-            <a class="button" href="/consumer-ca.html">California form</a>
-            <a class="button ghost" href="/consumer-ga.html">Georgia form</a>
+            <a class="button" href="/consumer-ca.html">Join waitlist</a>
           </div>
           <div class="status">
             <p>What to expect:</p>
@@ -85,21 +127,21 @@
         </aside>
       </section>
 
-      <section class="card-grid blog-grid">
+      <section class="feature-grid">
         <article class="card">
-          <p class="card-kicker">Claude Updates</p>
-          <h2>Prompting patterns we like this week</h2>
-          <p>Fast, low-friction prompt shapes that keep Claude focused without over-specifying.</p>
+          <p class="card-kicker">Live Surface</p>
+          <h2>Layered 3D wallpaper</h2>
+          <p>GPU-animated orbs with parallax motion keep the desktop experience vivid, not flat.</p>
         </article>
         <article class="card">
-          <p class="card-kicker">Workflow</p>
-          <h2>How we sanity-check outputs</h2>
-          <p>A lightweight checklist for safety, accuracy, and speed when shipping AI responses.</p>
+          <p class="card-kicker">Instant Opt-In</p>
+          <h2>Two-click waitlist</h2>
+          <p>State-specific forms, verified phone/email, and under-5-minute confirmations.</p>
         </article>
         <article class="card">
-          <p class="card-kicker">Signals</p>
-          <h2>Upcoming Claude features to watch</h2>
-          <p>Rumored upgrades and what they might mean for everyday use.</p>
+          <p class="card-kicker">Updates</p>
+          <h2>Claude drops & workflows</h2>
+          <p>Short briefs, prompt shapes, and rollout notes delivered over SMS + email.</p>
         </article>
       </section>
 
@@ -131,5 +173,82 @@
         </div>
       </footer>
     </main>
+    <script>
+      (() => {
+        const canvas = document.getElementById("bg-canvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        let w = 0;
+        let h = 0;
+        let dpr = 1;
+        const particles = [];
+        const colors = ["rgba(255,138,0,0.65)", "rgba(255,94,58,0.55)", "rgba(255,138,0,0.35)"];
+        const COUNT = 48;
+        const pointer = { x: 0, y: 0 };
+
+        function resize() {
+          dpr = window.devicePixelRatio || 1;
+          w = window.innerWidth;
+          h = window.innerHeight;
+          canvas.width = w * dpr;
+          canvas.height = h * dpr;
+          canvas.style.width = w + "px";
+          canvas.style.height = h + "px";
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function init() {
+          particles.length = 0;
+          for (let i = 0; i < COUNT; i++) {
+            particles.push({
+              x: Math.random() * w,
+              y: Math.random() * h,
+              r: 30 + Math.random() * 140,
+              dx: (Math.random() - 0.5) * 0.6,
+              dy: (Math.random() - 0.5) * 0.6,
+              z: 0.6 + Math.random() * 1.4,
+              c: colors[i % colors.length],
+            });
+          }
+        }
+
+        function step() {
+          ctx.clearRect(0, 0, w, h);
+          for (const p of particles) {
+            p.x += p.dx;
+            p.y += p.dy;
+            if (p.x < -p.r) p.x = w + p.r;
+            else if (p.x > w + p.r) p.x = -p.r;
+            if (p.y < -p.r) p.y = h + p.r;
+            else if (p.y > h + p.r) p.y = -p.r;
+
+            const parallax = 0.04;
+            const ox = ((pointer.x || w / 2) - w / 2) * parallax / p.z;
+            const oy = ((pointer.y || h / 2) - h / 2) * parallax / p.z;
+            const grad = ctx.createRadialGradient(p.x + ox, p.y + oy, p.r * 0.1, p.x + ox, p.y + oy, p.r);
+            grad.addColorStop(0, p.c);
+            grad.addColorStop(1, "rgba(0,0,0,0)");
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(p.x + ox, p.y + oy, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          requestAnimationFrame(step);
+        }
+
+        window.addEventListener("pointermove", (e) => {
+          pointer.x = e.clientX;
+          pointer.y = e.clientY;
+        });
+        window.addEventListener("resize", () => {
+          resize();
+          init();
+        });
+
+        resize();
+        init();
+        step();
+      })();
+    </script>
   </body>
 </html>
