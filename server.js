@@ -5,8 +5,9 @@ const os = require("os");
 const path = require("path");
 const { URL } = require("url");
 
+const DEFAULT_GOOGLE_TAG_ID = "AW-18041225391";
 const PORT = process.env.PORT || 3030;
-const HOST = process.env.HOST || "127.0.0.1";
+const HOST = resolveHost(process.env.HOST);
 const ROOT = __dirname;
 const PUBLIC_DIR = path.join(ROOT, "public");
 const REQUESTED_DATA_DIR = process.env.DATA_DIR
@@ -27,7 +28,7 @@ const LEAD_WEBHOOK_TIMEOUT_MS = cleanTimeout(
 );
 const GTM_CONTAINER_ID = cleanTrackingValue(process.env.GTM_CONTAINER_ID, 64);
 const GA_MEASUREMENT_ID = cleanTrackingValue(
-  process.env.GA_MEASUREMENT_ID,
+  process.env.GA_MEASUREMENT_ID || DEFAULT_GOOGLE_TAG_ID,
   64
 );
 const META_PIXEL_ID = cleanTrackingValue(process.env.META_PIXEL_ID, 64);
@@ -207,6 +208,19 @@ function resolveWritableDataDir(preferredDir) {
   }
 
   throw new Error("No writable data directory available");
+}
+
+function resolveHost(requestedHost) {
+  // Render requires binding to every interface regardless of any stale env value.
+  if (
+    process.env.RENDER_SERVICE_ID ||
+    process.env.RENDER ||
+    process.env.RENDER_EXTERNAL_URL
+  ) {
+    return "0.0.0.0";
+  }
+
+  return String(requestedHost || "127.0.0.1").trim() || "127.0.0.1";
 }
 
 function ensureCredentials() {
