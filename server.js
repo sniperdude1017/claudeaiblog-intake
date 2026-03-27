@@ -304,12 +304,46 @@ function serveFile(res, filePath) {
     if (error) {
       return sendText(res, 404, "Not Found");
     }
+
+    let body = content;
+    if (path.extname(filePath).toLowerCase() === ".html") {
+      body = injectTrackingMarkup(content.toString("utf8"));
+    }
+
     res.writeHead(200, {
       "Content-Type": contentType(filePath),
       "Cache-Control": "no-store",
     });
-    res.end(content);
+    res.end(body);
   });
+}
+
+function injectTrackingMarkup(html) {
+  const markup = renderTrackingHeadMarkup();
+  if (!markup || html.includes('data-analytics="gtag"')) {
+    return html;
+  }
+
+  return html.replace("</head>", `${markup}\n  </head>`);
+}
+
+function renderTrackingHeadMarkup() {
+  if (!GA_MEASUREMENT_ID) {
+    return "";
+  }
+
+  const tagId = JSON.stringify(GA_MEASUREMENT_ID);
+  return [
+    `    <script async src="https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
+      GA_MEASUREMENT_ID
+    )}" data-analytics="gtag"></script>`,
+    "    <script>",
+    "      window.dataLayer = window.dataLayer || [];",
+    "      window.gtag = window.gtag || function gtag(){dataLayer.push(arguments);};",
+    "      window.gtag('js', new Date());",
+    `      window.gtag('config', ${tagId});`,
+    "    </script>",
+  ].join("\n");
 }
 
 function readBody(req) {
