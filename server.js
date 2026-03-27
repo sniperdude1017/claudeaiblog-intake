@@ -6,6 +6,7 @@ const path = require("path");
 const { URL } = require("url");
 
 const DEFAULT_GOOGLE_TAG_ID = "AW-18041225391";
+const DEFAULT_GOOGLE_ADS_CONVERSION_LABEL = "non1CMLJt5AcEK-B3ZpD";
 const PORT = process.env.PORT || 3030;
 const HOST = resolveHost(process.env.HOST);
 const ROOT = __dirname;
@@ -29,7 +30,7 @@ const LEAD_WEBHOOK_TIMEOUT_MS = cleanTimeout(
 const GTM_CONTAINER_ID = cleanTrackingValue(process.env.GTM_CONTAINER_ID, 64);
 const GA_MEASUREMENT_ID = resolveGoogleTagId(process.env.GA_MEASUREMENT_ID);
 const GOOGLE_ADS_CONVERSION_LABEL = cleanTrackingValue(
-  process.env.GOOGLE_ADS_CONVERSION_LABEL,
+  process.env.GOOGLE_ADS_CONVERSION_LABEL || DEFAULT_GOOGLE_ADS_CONVERSION_LABEL,
   120
 );
 const META_PIXEL_ID = cleanTrackingValue(process.env.META_PIXEL_ID, 64);

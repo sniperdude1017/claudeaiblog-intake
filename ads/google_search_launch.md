@@ -67,24 +67,24 @@ Add these at the campaign level:
 
 ### Responsive search ad headlines
 
-- `Claude Email Updates`
+- `Weekly Claude Email Brief`
 - `Track Claude Launch Notes`
-- `Independent Claude News`
+- `Claude Code Release Notes`
 - `Claude Model Updates`
-- `What Changed In Claude?`
+- `For Builders Using Claude`
 - `Readable Claude Coverage`
 - `Get Claude Updates Fast`
 - `Skip Generic AI Hype`
 - `Source-Backed Claude Notes`
-- `Join The Update List`
-- `Email Claude Updates`
+- `Join The Claude Brief`
+- `Weekly Claude Updates`
 
 ### Descriptions
 
-- `Get source-backed Claude updates by email, with launches, workflows, and product changes that matter.`
-- `Independent coverage of Claude updates without generic AI noise.`
-- `Skip the noise and get readable Claude release notes in one place.`
-- `Join the email list for Claude model news and workflow breakdowns.`
+- `Get a weekly Claude email brief with launches, workflow changes, and release notes worth tracking.`
+- `Built for builders, teams, and heavy Claude users who want signal instead of AI noise.`
+- `Read source-backed Claude release notes and product changes in one faster summary.`
+- `Join the email list for Claude model news, Claude Code notes, and workflow breakdowns.`
 
 ## Ad group 2
 
@@ -112,27 +112,27 @@ Add these at the campaign level:
 - `Claude Feature Breakdowns`
 - `Track Claude Releases`
 - `Opus Sonnet Haiku Notes`
-- `Workflow Notes That Matter`
+- `Weekly Workflow Notes`
 - `Understand Claude Faster`
 - `Independent Claude Guides`
-- `Get Claude Updates`
+- `For Builders And Teams`
 - `Track Product Changes`
 - `Email Claude Updates`
 
 ### Descriptions
 
-- `Follow Claude Code, Projects, Artifacts, and product changes that matter.`
+- `Follow Claude Code, Projects, Artifacts, and product changes that matter in one weekly brief.`
 - `Independent Claude guides for writing, coding, research, and analysis workflows.`
 - `Get readable updates instead of digging through every release post yourself.`
 - `Join the email list for source-backed Claude feature notes and workflow breakdowns.`
 
 ## Callouts
 
-- `Independent coverage`
+- `Weekly email brief`
+- `For builders and teams`
 - `Source-backed updates`
 - `Claude Code coverage`
-- `Projects and Artifacts`
-- `No generic AI filler`
+- `No spam`
 
 ## Sitelinks
 
@@ -153,3 +153,5 @@ Add these at the campaign level:
 - Check search terms after the first 24 hours and add negatives aggressively.
 - If conversion tracking is not live yet, judge day-one performance by clicks, CTR, and actual form submissions.
 - After the page is live, validate one test lead in Google Ads using the conversion label env var before increasing budget.
+- Keep Google Search Partners off during learning until the `Submit lead form` conversion action is active and reporting.
+- Do not switch bidding strategy or make repeated budget changes while the campaign is still learning.
