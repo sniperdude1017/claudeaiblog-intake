@@ -25,10 +25,13 @@ Current behavior:
 
 - the join page is U.S.-wide
 - legacy `/consumer-ca.html` and `/consumer-ga.html` redirect to `/join.html`
+- the homepage keeps a single primary CTA into `/join.html`
 - time selection on the join page is generated from 15-minute dropdown options
 - the address field is wired for Google Maps Places autocomplete when `GOOGLE_MAPS_API_KEY` is configured
 - the homepage, join page, privacy page, and thank-you page share the same refreshed nav/footer system
 - the public privacy page now uses consumer-facing copy and avoids exposing internal lead-routing or admin details
+- Google Ads / Google tag support is injected into the live page HTML server-side so ad diagnostics can see the tag without waiting for client-side JavaScript
+- the public pages now include crawl metadata and a public `robots.txt` file for ad-review and preview crawlers
 
 It stores submissions in ordered local files:
 
@@ -66,6 +69,32 @@ Then open:
 
 If `BASIC_AUTH_USERNAME` and `BASIC_AUTH_PASSWORD` are not set, the app falls back to the local credential file at `data/admin-credentials.json`.
 
+## Paid traffic
+
+Primary paid landing URLs:
+
+- `https://claudeaiblog.com/?utm_source=bing&utm_medium=cpc&utm_campaign=claude_updates_search`
+- `https://claudeaiblog.com/join.html?utm_source=google&utm_medium=cpc&utm_campaign=claude_updates_search`
+- `https://claudeaiblog.com/join.html?utm_source=bing&utm_medium=cpc&utm_campaign=claude_updates_search`
+
+Current tracking state:
+
+- Google tag / Ads ID: `AW-18041225391`
+- `msclkid`, `gclid`, `fbclid`, and `utm_*` values are captured with the lead
+- runtime tracking config is exposed through `/config.js`
+
+Launch sheets in this repo:
+
+- [ads/google_search_launch.md](/Users/m5cs/inbound-lead-intake/ads/google_search_launch.md)
+- [ads/microsoft_ads_launch.md](/Users/m5cs/inbound-lead-intake/ads/microsoft_ads_launch.md)
+- [ads/reddit_ads_launch.md](/Users/m5cs/inbound-lead-intake/ads/reddit_ads_launch.md)
+
+Current channel status:
+
+- Google Search: campaign created and enabled, still under Google review
+- Microsoft Ads: signup flow started, not launched yet
+- Reddit Ads: account signup advanced, not launched yet
+
 ## Automation hooks
 
 The website now keeps ad/source attribution attached to the lead all the way from the landing page to the form submit. That gives you workable routing data instead of anonymous form fills.
@@ -86,6 +115,7 @@ Two automation paths are available without adding dependencies:
    - set `GTM_CONTAINER_ID` or `GA_MEASUREMENT_ID` to enable browser tracking from runtime config
    - set `META_PIXEL_ID` if you want Meta Lead events from the thank-you page
    - the thank-you page is the clean conversion destination for paid traffic
+   - the server also injects the Google tag directly into HTML responses when a Google tag ID is configured so ad crawlers can detect it reliably
 
 4. Optional address autocomplete
    - set `GOOGLE_MAPS_API_KEY` to enable Google Maps Places autocomplete on the join-page address field
@@ -119,6 +149,7 @@ Important:
 - Hosted deployments are no longer local-only.
 - Lead data should live on a persistent disk, not ephemeral container storage.
 - This app still captures only inbound, self-submitted leads.
+- If you use paid traffic, keep the landing page URL stable and vary attribution through query params instead of creating duplicate page files.
 
 ## Notes
 

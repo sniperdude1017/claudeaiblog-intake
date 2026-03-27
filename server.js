@@ -55,6 +55,7 @@ const PUBLIC_PATHS = new Set([
   "/join.html",
   "/thanks.html",
   "/privacy.html",
+  "/robots.txt",
   "/config.js",
   "/app.js",
   "/styles.css",
@@ -72,13 +73,20 @@ const segments = {
 ensureDataFiles();
 
 const server = http.createServer(async (req, res) => {
-  if (req.method === "GET" && req.url === "/healthz") {
+  res.__requestMethod = req.method;
+
+  if ((req.method === "GET" || req.method === "HEAD") && req.url === "/healthz") {
     return sendText(res, 200, "ok");
   }
 
   const url = new URL(req.url, `http://${req.headers.host}`);
+  const publicFilePath = resolvePublicFilePath(url.pathname);
+  const isPublicStaticRequest =
+    (req.method === "GET" || req.method === "HEAD") &&
+    publicFilePath &&
+    fs.existsSync(publicFilePath);
 
-  if (req.method === "GET" && url.pathname === "/config.js") {
+  if ((req.method === "GET" || req.method === "HEAD") && url.pathname === "/config.js") {
     return sendJavaScript(
       res,
       200,
@@ -86,12 +94,16 @@ const server = http.createServer(async (req, res) => {
     );
   }
 
-  if (req.method === "GET" && LEGACY_JOIN_PATHS.has(url.pathname)) {
+  if ((req.method === "GET" || req.method === "HEAD") && LEGACY_JOIN_PATHS.has(url.pathname)) {
     return redirect(res, "/join.html");
   }
 
   if (!isAuthorized(req)) {
-    if (PUBLIC_PATHS.has(url.pathname) || (req.method === "POST" && url.pathname === "/api/leads")) {
+    if (
+      PUBLIC_PATHS.has(url.pathname) ||
+      isPublicStaticRequest ||
+      (req.method === "POST" && url.pathname === "/api/leads")
+    ) {
       // allow public routes and lead submissions without auth
     } else {
       res.writeHead(401, {
@@ -131,10 +143,6 @@ const server = http.createServer(async (req, res) => {
         count: leads.length,
         leadId: lead.lead_id,
         segment: lead.segment,
-        priority: lead.priority,
-        routingLane: lead.routing_lane,
-        repeatSubmission: lead.repeat_submission,
-        webhookDeliveryStatus: lead.webhook_delivery_status,
       });
     } catch (error) {
       return sendJson(res, 400, {
@@ -154,7 +162,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (req.method === "GET" && url.pathname === "/") {
+  if ((req.method === "GET" || req.method === "HEAD") && url.pathname === "/") {
     return serveFile(res, path.join(PUBLIC_DIR, "index.html"));
   }
 
@@ -295,6 +303,14 @@ function sanitizePath(rawPath) {
   return normalized.startsWith(path.sep) ? normalized.slice(1) : normalized;
 }
 
+function resolvePublicFilePath(rawPath) {
+  const filePath = path.join(PUBLIC_DIR, sanitizePath(rawPath));
+  if (!filePath.startsWith(PUBLIC_DIR)) {
+    return null;
+  }
+  return filePath;
+}
+
 function serveFile(res, filePath) {
   if (!filePath.startsWith(PUBLIC_DIR)) {
     return sendText(res, 403, "Forbidden");
@@ -314,6 +330,10 @@ function serveFile(res, filePath) {
       "Content-Type": contentType(filePath),
       "Cache-Control": "no-store",
     });
+    if (res.req?.method === "HEAD") {
+      res.end();
+      return;
+    }
     res.end(body);
   });
 }
@@ -799,6 +819,7 @@ function contentType(filePath) {
   if (ext === ".css") return "text/css; charset=utf-8";
   if (ext === ".js") return "application/javascript; charset=utf-8";
   if (ext === ".json") return "application/json; charset=utf-8";
+  if (ext === ".svg") return "image/svg+xml";
   if (ext === ".txt") return "text/plain; charset=utf-8";
   return "application/octet-stream";
 }
@@ -808,6 +829,10 @@ function sendJson(res, statusCode, body) {
     "Content-Type": "application/json; charset=utf-8",
     "Cache-Control": "no-store",
   });
+  if (res.__requestMethod === "HEAD") {
+    res.end();
+    return;
+  }
   res.end(JSON.stringify(body));
 }
 
@@ -816,6 +841,10 @@ function sendText(res, statusCode, body) {
     "Content-Type": "text/plain; charset=utf-8",
     "Cache-Control": "no-store",
   });
+  if (res.__requestMethod === "HEAD") {
+    res.end();
+    return;
+  }
   res.end(body);
 }
 
@@ -832,5 +861,9 @@ function sendJavaScript(res, statusCode, body) {
     "Content-Type": "application/javascript; charset=utf-8",
     "Cache-Control": "no-store",
   });
+  if (res.__requestMethod === "HEAD") {
+    res.end();
+    return;
+  }
   res.end(body);
 }

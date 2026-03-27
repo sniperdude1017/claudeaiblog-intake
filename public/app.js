@@ -82,10 +82,6 @@ function bindLeadForms() {
 
         writeStorage(CONVERSION_STORAGE_KEY, {
           leadId: result.leadId || "",
-          priority: result.priority || "",
-          routingLane: result.routingLane || "",
-          repeatSubmission: Boolean(result.repeatSubmission),
-          webhookDeliveryStatus: result.webhookDeliveryStatus || "",
           segment: result.segment || payload.segment,
           state: stateFromSegment(result.segment || payload.segment),
           attribution: payload.attribution,
@@ -505,8 +501,6 @@ function handleThankYouPage() {
     event: "generate_lead",
     lead_segment: lead.segment || segment,
     lead_state: lead.state || stateFromSegment(segment),
-    lead_priority: lead.priority || "",
-    routing_lane: lead.routingLane || "",
     source_channel: deriveSourceChannel(lead.attribution || {}),
     utm_source: (lead.attribution && lead.attribution.utmSource) || "",
     utm_medium: (lead.attribution && lead.attribution.utmMedium) || "",
