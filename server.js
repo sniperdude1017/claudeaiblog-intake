@@ -328,7 +328,7 @@ function injectTrackingMarkup(html) {
 }
 
 function renderTrackingHeadMarkup() {
-  if (!GA_MEASUREMENT_ID) {
+  if (GTM_CONTAINER_ID || !GA_MEASUREMENT_ID) {
     return "";
   }
 
