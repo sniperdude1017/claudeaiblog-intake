@@ -27,10 +27,7 @@ const LEAD_WEBHOOK_TIMEOUT_MS = cleanTimeout(
   4000
 );
 const GTM_CONTAINER_ID = cleanTrackingValue(process.env.GTM_CONTAINER_ID, 64);
-const GA_MEASUREMENT_ID = cleanTrackingValue(
-  process.env.GA_MEASUREMENT_ID || DEFAULT_GOOGLE_TAG_ID,
-  64
-);
+const GA_MEASUREMENT_ID = resolveGoogleTagId(process.env.GA_MEASUREMENT_ID);
 const META_PIXEL_ID = cleanTrackingValue(process.env.META_PIXEL_ID, 64);
 const GOOGLE_MAPS_API_KEY = cleanTrackingValue(
   process.env.GOOGLE_MAPS_API_KEY,
@@ -221,6 +218,16 @@ function resolveHost(requestedHost) {
   }
 
   return String(requestedHost || "127.0.0.1").trim() || "127.0.0.1";
+}
+
+function resolveGoogleTagId(requestedTagId) {
+  const cleaned = cleanTrackingValue(requestedTagId, 64);
+
+  if (/^(G|AW)-[A-Z0-9-]+$/i.test(cleaned)) {
+    return cleaned;
+  }
+
+  return DEFAULT_GOOGLE_TAG_ID;
 }
 
 function ensureCredentials() {
