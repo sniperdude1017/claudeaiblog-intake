@@ -28,6 +28,10 @@ const LEAD_WEBHOOK_TIMEOUT_MS = cleanTimeout(
 );
 const GTM_CONTAINER_ID = cleanTrackingValue(process.env.GTM_CONTAINER_ID, 64);
 const GA_MEASUREMENT_ID = resolveGoogleTagId(process.env.GA_MEASUREMENT_ID);
+const GOOGLE_ADS_CONVERSION_LABEL = cleanTrackingValue(
+  process.env.GOOGLE_ADS_CONVERSION_LABEL,
+  120
+);
 const META_PIXEL_ID = cleanTrackingValue(process.env.META_PIXEL_ID, 64);
 const GOOGLE_MAPS_API_KEY = cleanTrackingValue(
   process.env.GOOGLE_MAPS_API_KEY,
@@ -42,6 +46,7 @@ const LEGACY_JOIN_PATHS = new Set([
 const CLIENT_CONFIG = {
   gtmContainerId: GTM_CONTAINER_ID,
   gaMeasurementId: GTM_CONTAINER_ID ? "" : GA_MEASUREMENT_ID,
+  googleAdsConversionLabel: GOOGLE_ADS_CONVERSION_LABEL,
   metaPixelId: META_PIXEL_ID,
   googleMapsApiKey: GOOGLE_MAPS_API_KEY,
   thankYouPath: THANK_YOU_PATH,
@@ -393,6 +398,7 @@ function normalizeLead(payload, req, existingLeads) {
   const now = new Date().toISOString();
   const name = cleanText(payload.name, 100);
   const email = cleanEmail(payload.email);
+  const rawPhone = String(payload.phone || "").trim();
   const phone = cleanPhone(payload.phone);
   const bestTimeStart = cleanTimeValue(
     payload.bestTimeStart || payload.best_time_start
@@ -401,25 +407,32 @@ function normalizeLead(payload, req, existingLeads) {
     payload.bestTimeEnd || payload.best_time_end
   );
   const attribution = normalizeAttribution(payload.attribution);
+  const hasPhone = Boolean(phone);
   const priorMatches = existingLeads.filter(
-    (lead) => lead.email === email || lead.phone === phone
+    (lead) => lead.email === email || (phone && lead.phone === phone)
   );
   const submissionIndex = priorMatches.length + 1;
   const sourceChannel = deriveSourceChannel(attribution);
-  const priority = derivePriority(sourceChannel, submissionIndex);
-  const leadScore = deriveLeadScore(sourceChannel, submissionIndex, attribution);
+  const priority = derivePriority(sourceChannel, submissionIndex, hasPhone);
+  const leadScore = deriveLeadScore(
+    sourceChannel,
+    submissionIndex,
+    attribution,
+    hasPhone
+  );
   const followUpDeadline = new Date(
     Date.now() + followUpDelayMinutes(priority) * 60_000
   ).toISOString();
 
   if (!name) throw new Error("Name is required");
   if (!email) throw new Error("Valid email is required");
-  if (!phone) throw new Error("Valid phone is required");
-  if (!address) throw new Error("Address is required");
-  if (!bestTimeStart || !bestTimeEnd) {
-    throw new Error("Best time to reach you is required");
+  if (rawPhone && !phone) {
+    throw new Error("Phone must be a valid 10-digit number");
   }
-  if (bestTimeStart >= bestTimeEnd) {
+  if ((bestTimeStart && !bestTimeEnd) || (!bestTimeStart && bestTimeEnd)) {
+    throw new Error("Choose both callback times or leave both blank");
+  }
+  if (bestTimeStart && bestTimeEnd && bestTimeStart >= bestTimeEnd) {
     throw new Error("Best time window must end after it starts");
   }
 
@@ -433,16 +446,16 @@ function normalizeLead(payload, req, existingLeads) {
     market: segmentConfig.market,
     state: segmentConfig.state,
     segment,
-    consent_source: "not-collected",
-    owns_phone: false,
-    phone_verification_status: "not-collected",
+    consent_source: "join-form",
+    owns_phone: hasPhone,
+    phone_verification_status: hasPhone ? "user-provided" : "not-provided",
     best_time_start: bestTimeStart,
     best_time_end: bestTimeEnd,
     source_channel: sourceChannel,
     priority,
     lead_score: leadScore,
     routing_lane: `${segmentConfig.state.toLowerCase()}-${priority}-${sourceChannel}`,
-    follow_up_channel: "call-first",
+    follow_up_channel: hasPhone ? "email-or-phone" : "email-first",
     follow_up_deadline: followUpDeadline,
     repeat_submission: submissionIndex > 1,
     submission_index: submissionIndex,
@@ -605,22 +618,28 @@ function deriveSourceChannel(attribution) {
   return "direct";
 }
 
-function derivePriority(sourceChannel, submissionIndex) {
-  if (submissionIndex > 1 || sourceChannel === "paid") {
+function derivePriority(sourceChannel, submissionIndex, hasPhone) {
+  if (submissionIndex > 1 || (sourceChannel === "paid" && hasPhone)) {
     return "hot";
   }
-  if (sourceChannel === "referral" || sourceChannel === "campaign") {
+  if (
+    sourceChannel === "paid" ||
+    sourceChannel === "referral" ||
+    sourceChannel === "campaign" ||
+    hasPhone
+  ) {
     return "warm";
   }
   return "new";
 }
 
-function deriveLeadScore(sourceChannel, submissionIndex, attribution) {
+function deriveLeadScore(sourceChannel, submissionIndex, attribution, hasPhone) {
   let score = 55;
   if (sourceChannel === "paid") score += 20;
   if (sourceChannel === "referral") score += 10;
   if (sourceChannel === "campaign") score += 5;
   if (attribution.utm_campaign) score += 5;
+  if (hasPhone) score += 10;
   if (submissionIndex > 1) score += 10;
   return Math.min(score, 100);
 }
@@ -729,7 +748,7 @@ function renderNotes(leads) {
         lead.timestamp,
         lead.priority.toUpperCase(),
         lead.name,
-        lead.phone,
+        lead.phone || "no phone",
         lead.email,
         lead.market,
         lead.state,

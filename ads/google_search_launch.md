@@ -1,6 +1,6 @@
 # Google Search Launch
 
-Use this campaign first. It is built around the live landing page at `https://claudeaiblog.com/join.html`.
+Use this campaign first. It is built around the live landing page at `https://claudeaiblog.com/join.html` and should point to the email-first signup flow.
 
 ## Campaign settings
 
@@ -20,6 +20,12 @@ Use this campaign first. It is built around the live landing page at `https://cl
 
 - Primary landing page:
   - `https://claudeaiblog.com/join.html?utm_source=google&utm_medium=cpc&utm_campaign=claude_updates_search`
+
+## Tracking
+
+- Set `GA_MEASUREMENT_ID` or `GTM_CONTAINER_ID` for analytics.
+- Set `GOOGLE_ADS_CONVERSION_LABEL` to the Google Ads lead conversion label so the thank-you page can fire the right conversion event.
+- Keep the final URL stable and vary only `utm_*` values and ad-specific content IDs.
 
 ## Negative keywords
 
@@ -61,7 +67,7 @@ Add these at the campaign level:
 
 ### Responsive search ad headlines
 
-- `Claude AI Updates`
+- `Claude Email Updates`
 - `Track Claude Launch Notes`
 - `Independent Claude News`
 - `Claude Model Updates`
@@ -71,13 +77,14 @@ Add these at the campaign level:
 - `Skip Generic AI Hype`
 - `Source-Backed Claude Notes`
 - `Join The Update List`
+- `Email Claude Updates`
 
 ### Descriptions
 
-- `Get source-backed notes on Claude launches, Claude Code, Projects, and Artifacts.`
-- `Independent coverage of Claude updates, workflows, and product changes that matter.`
+- `Get source-backed Claude updates by email, with launches, workflows, and product changes that matter.`
+- `Independent coverage of Claude updates without generic AI noise.`
 - `Skip the noise and get readable Claude release notes in one place.`
-- `Join the update list for Claude model news and workflow breakdowns.`
+- `Join the email list for Claude model news and workflow breakdowns.`
 
 ## Ad group 2
 
@@ -110,13 +117,14 @@ Add these at the campaign level:
 - `Independent Claude Guides`
 - `Get Claude Updates`
 - `Track Product Changes`
+- `Email Claude Updates`
 
 ### Descriptions
 
 - `Follow Claude Code, Projects, Artifacts, and product changes that matter.`
 - `Independent Claude guides for writing, coding, research, and analysis workflows.`
 - `Get readable updates instead of digging through every release post yourself.`
-- `Join for source-backed Claude feature notes and workflow breakdowns.`
+- `Join the email list for source-backed Claude feature notes and workflow breakdowns.`
 
 ## Callouts
 
@@ -144,3 +152,4 @@ Add these at the campaign level:
 - Keep ad copy clearly independent and not official Anthropic branding.
 - Check search terms after the first 24 hours and add negatives aggressively.
 - If conversion tracking is not live yet, judge day-one performance by clicks, CTR, and actual form submissions.
+- After the page is live, validate one test lead in Google Ads using the conversion label env var before increasing budget.

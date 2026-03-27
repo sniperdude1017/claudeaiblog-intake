@@ -14,14 +14,14 @@ const TRACKING_KEYS = [
 ];
 const JOIN_PREVIEW_COPY = {
   news: {
-    search: "Search Claude news",
-    caption: "Latest brief",
-    action: "Read now",
+    search: "This week's Claude brief",
+    caption: "Weekly brief",
+    action: "Open summary",
   },
   workflows: {
-    search: "Search Claude workflows",
-    caption: "Workflow guide",
-    action: "Open guide",
+    search: "Why this update matters",
+    caption: "Action guide",
+    action: "See takeaways",
   },
 };
 const TIME_OPTION_INTERVAL_MINUTES = 15;
@@ -48,6 +48,35 @@ function bindLeadForms() {
   for (const form of forms) {
     const status = form.querySelector(".form-status");
     const submitButton = form.querySelector('button[type="submit"]');
+    let trackedStart = false;
+
+    if (form.dataset.viewTracked !== "true") {
+      form.dataset.viewTracked = "true";
+      trackEvent("lead_form_view", {
+        lead_segment: form.dataset.segment || "consumer-us",
+      });
+    }
+
+    form.addEventListener("input", (event) => {
+      if (trackedStart) {
+        return;
+      }
+
+      const target = event.target;
+      if (
+        !(target instanceof HTMLInputElement) &&
+        !(target instanceof HTMLSelectElement) &&
+        !(target instanceof HTMLTextAreaElement)
+      ) {
+        return;
+      }
+
+      trackedStart = true;
+      trackEvent("lead_form_start", {
+        lead_segment: form.dataset.segment || "consumer-us",
+        field_name: target.name || "unknown",
+      });
+    });
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -55,16 +84,23 @@ function bindLeadForms() {
       if (submitButton) submitButton.disabled = true;
 
       const formData = new FormData(form);
+      const attribution = buildLeadAttribution();
+      const sourceChannel = deriveSourceChannel(attribution);
       const payload = {
         segment: form.dataset.segment || "consumer-us",
-        name: formData.get("name"),
-        email: formData.get("email"),
-        phone: formData.get("phone"),
-        address: formData.get("address"),
-        bestTimeStart: formData.get("bestTimeStart"),
-        bestTimeEnd: formData.get("bestTimeEnd"),
-        attribution: buildLeadAttribution(),
+        name: cleanOptionalField(formData.get("name")),
+        email: cleanOptionalField(formData.get("email")),
+        phone: cleanOptionalField(formData.get("phone")),
+        address: cleanOptionalField(formData.get("address")),
+        bestTimeStart: cleanOptionalField(formData.get("bestTimeStart")),
+        bestTimeEnd: cleanOptionalField(formData.get("bestTimeEnd")),
+        attribution,
       };
+
+      trackEvent("lead_form_submit", {
+        lead_segment: payload.segment,
+        source_channel: sourceChannel,
+      });
 
       try {
         const response = await fetch("/api/leads", {
@@ -86,6 +122,10 @@ function bindLeadForms() {
           state: stateFromSegment(result.segment || payload.segment),
           attribution: payload.attribution,
         });
+        trackEvent("lead_form_success", {
+          lead_segment: result.segment || payload.segment,
+          source_channel: sourceChannel,
+        });
 
         form.reset();
         window.location.assign(
@@ -98,6 +138,12 @@ function bindLeadForms() {
           status.textContent =
             error && error.message ? error.message : "Submission failed";
         }
+        trackEvent("lead_form_error", {
+          lead_segment: payload.segment,
+          source_channel: sourceChannel,
+          error_message:
+            error && error.message ? error.message : "Submission failed",
+        });
         if (submitButton) submitButton.disabled = false;
       }
     });
@@ -483,9 +529,9 @@ function handleThankYouPage() {
   if (copy) {
     const intro =
       segment && stateLabel !== "selected"
-        ? `Thanks for joining the ${stateLabel} Claude update list.`
-        : "Thanks for joining the Claude update list.";
-    copy.textContent = `${intro} We saved your request and will use your selected contact channels for launch notes, feature updates, and workflow roundups.`;
+        ? `Thanks for joining the ${stateLabel} Claude brief.`
+        : "Thanks for joining the Claude brief.";
+    copy.textContent = `${intro} We saved your signup and will use email for launch notes, feature updates, and workflow roundups.`;
   }
 
   if (detail) {
@@ -498,7 +544,6 @@ function handleThankYouPage() {
   }
 
   const trackingPayload = {
-    event: "generate_lead",
     lead_segment: lead.segment || segment,
     lead_state: lead.state || stateFromSegment(segment),
     source_channel: deriveSourceChannel(lead.attribution || {}),
@@ -507,14 +552,23 @@ function handleThankYouPage() {
     utm_campaign: (lead.attribution && lead.attribution.utmCampaign) || "",
   };
 
-  window.dataLayer.push(trackingPayload);
+  trackEvent("generate_lead", {
+    segment: trackingPayload.lead_segment,
+    lead_segment: trackingPayload.lead_segment,
+    lead_state: trackingPayload.lead_state,
+    source_channel: trackingPayload.source_channel,
+    utm_source: trackingPayload.utm_source,
+    utm_medium: trackingPayload.utm_medium,
+    utm_campaign: trackingPayload.utm_campaign,
+    campaign_name: trackingPayload.utm_campaign,
+  });
 
-  if (typeof window.gtag === "function") {
-    window.gtag("event", "generate_lead", {
-      segment: trackingPayload.lead_segment,
-      lead_state: trackingPayload.lead_state,
-      source_channel: trackingPayload.source_channel,
-      campaign_name: trackingPayload.utm_campaign,
+  const googleAdsSendTo = buildGoogleAdsSendTo();
+  if (googleAdsSendTo && typeof window.gtag === "function") {
+    window.gtag("event", "conversion", {
+      send_to: googleAdsSendTo,
+      value: 1,
+      currency: "USD",
     });
   }
 
@@ -598,6 +652,17 @@ function createTrackingSessionId() {
   return `lead-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
+function buildGoogleAdsSendTo() {
+  const label = cleanOptionalField(SITE_CONFIG.googleAdsConversionLabel);
+  const measurementId = cleanOptionalField(SITE_CONFIG.gaMeasurementId);
+
+  if (!label || !measurementId || !measurementId.startsWith("AW-")) {
+    return "";
+  }
+
+  return `${measurementId}/${label}`;
+}
+
 function normalizeUrl(value) {
   const text = String(value || "").trim();
   if (!text) return "";
@@ -638,5 +703,27 @@ function clearStorage(key) {
     window.localStorage.removeItem(key);
   } catch {
     // Ignore storage failures.
+  }
+}
+
+function cleanOptionalField(value) {
+  return String(value || "").trim();
+}
+
+function trackEvent(name, params = {}) {
+  const payload = { event: name };
+
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== "" && value !== null && value !== undefined) {
+      payload[key] = value;
+    }
+  }
+
+  window.dataLayer.push(payload);
+
+  if (typeof window.gtag === "function") {
+    const gtagParams = { ...payload };
+    delete gtagParams.event;
+    window.gtag("event", name, gtagParams);
   }
 }
