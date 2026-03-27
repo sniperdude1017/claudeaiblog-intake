@@ -28,6 +28,7 @@ Current behavior:
 - time selection on the join page is generated from 15-minute dropdown options
 - the address field is wired for Google Maps Places autocomplete when `GOOGLE_MAPS_API_KEY` is configured
 - the homepage, join page, privacy page, and thank-you page share the same refreshed nav/footer system
+- the public privacy page now uses consumer-facing copy and avoids exposing internal lead-routing or admin details
 
 It stores submissions in ordered local files:
 
