@@ -406,7 +406,12 @@ function normalizeLead(payload, req, existingLeads) {
   const bestTimeEnd = cleanTimeValue(
     payload.bestTimeEnd || payload.best_time_end
   );
-  const attribution = normalizeAttribution(payload.attribution);
+  const attribution = normalizeAttribution({
+    ...(payload && typeof payload === "object" ? payload : {}),
+    ...(payload.attribution && typeof payload.attribution === "object"
+      ? payload.attribution
+      : {}),
+  });
   const hasPhone = Boolean(phone);
   const priorMatches = existingLeads.filter(
     (lead) => lead.email === email || (phone && lead.phone === phone)
