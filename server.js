@@ -444,7 +444,10 @@ function normalizeLead(payload, req, existingLeads) {
 
   if (!name) throw new Error("Name is required");
   if (!email) throw new Error("Valid email is required");
-  if (rawPhone && !phone) {
+  if (!rawPhone) {
+    throw new Error("Phone is required");
+  }
+  if (!phone) {
     throw new Error("Phone must be a valid 10-digit number");
   }
   if ((bestTimeStart && !bestTimeEnd) || (!bestTimeStart && bestTimeEnd)) {
