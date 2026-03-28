@@ -67,24 +67,26 @@ Add these at the campaign level:
 
 ### Responsive search ad headlines
 
-- `Weekly Claude Email Brief`
+- `Claude Updates By Email`
+- `Source-Backed Claude Brief`
+- `Claude Code Notes Weekly`
+- `Release Notes Without Noise`
 - `Track Claude Launch Notes`
-- `Claude Code Release Notes`
-- `Claude Model Updates`
+- `Get Claude Launch Notes`
 - `For Builders Using Claude`
-- `Readable Claude Coverage`
-- `Get Claude Updates Fast`
+- `Practical Claude Summary`
+- `Claude Product Changes Fast`
+- `AI Updates Worth Reading`
 - `Skip Generic AI Hype`
-- `Source-Backed Claude Notes`
+- `Track Claude Releases`
 - `Join The Claude Brief`
-- `Weekly Claude Updates`
 
 ### Descriptions
 
-- `Get a weekly Claude email brief with launches, workflow changes, and release notes worth tracking.`
-- `Built for builders, teams, and heavy Claude users who want signal instead of AI noise.`
-- `Read source-backed Claude release notes and product changes in one faster summary.`
-- `Join the email list for Claude model news, Claude Code notes, and workflow breakdowns.`
+- `Get source-backed Claude updates, release notes, and Claude Code changes by email.`
+- `Built for people who want signal, not AI noise, from Claude launches and product changes.`
+- `Email-first signup. No address required. Opt in for a faster Claude brief.`
+- `Join for independent Claude coverage and direct links to the original sources.`
 
 ## Ad group 2
 
@@ -128,20 +130,19 @@ Add these at the campaign level:
 
 ## Callouts
 
-- `Weekly email brief`
-- `For builders and teams`
-- `Source-backed updates`
-- `Claude Code coverage`
+- `Email only signup`
+- `No address required`
+- `Practical AI brief`
 - `No spam`
 
 ## Sitelinks
 
-- `Get Claude Updates`
+- `Get The Brief`
   - `https://claudeaiblog.com/join.html?utm_source=google&utm_medium=cpc&utm_campaign=claude_updates_search&utm_content=sitelink_join`
-- `Claude AI Homepage`
-  - `https://claudeaiblog.com/?utm_source=google&utm_medium=cpc&utm_campaign=claude_updates_search&utm_content=sitelink_home`
-- `Join Form`
-  - `https://claudeaiblog.com/join.html?utm_source=google&utm_medium=cpc&utm_campaign=claude_updates_search&utm_content=sitelink_form#join-form`
+- `Claude Coverage`
+  - `https://claudeaiblog.com/?utm_source=google&utm_medium=cpc&utm_campaign=claude_updates_search&utm_content=sitelink_coverage#coverage-benefits`
+- `Source Trust`
+  - `https://claudeaiblog.com/?utm_source=google&utm_medium=cpc&utm_campaign=claude_updates_search&utm_content=sitelink_sources#source-trust`
 - `Privacy Policy`
   - `https://claudeaiblog.com/privacy.html?utm_source=google&utm_medium=cpc&utm_campaign=claude_updates_search&utm_content=sitelink_privacy`
 
