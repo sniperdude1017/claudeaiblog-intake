@@ -27,6 +27,18 @@ const LEAD_WEBHOOK_TIMEOUT_MS = cleanTimeout(
   process.env.LEAD_WEBHOOK_TIMEOUT_MS,
   4000
 );
+const TELEGRAM_FORWARD_TOKEN = cleanTrackingValue(
+  process.env.TELEGRAM_FORWARD_TOKEN,
+  200
+);
+const TELEGRAM_FORWARD_CHAT_ID = cleanTrackingValue(
+  process.env.TELEGRAM_FORWARD_CHAT_ID,
+  64
+);
+const TELEGRAM_FORWARD_TIMEOUT_MS = cleanTimeout(
+  process.env.TELEGRAM_FORWARD_TIMEOUT_MS,
+  4000
+);
 const GTM_CONTAINER_ID = cleanTrackingValue(process.env.GTM_CONTAINER_ID, 64);
 const GA_MEASUREMENT_ID = resolveGoogleTagId(process.env.GA_MEASUREMENT_ID);
 const GOOGLE_ADS_CONVERSION_LABEL = cleanTrackingValue(
@@ -737,41 +749,43 @@ function renderNotes(leads) {
 
   const lines = ["Inbound lead notes", ""];
   for (const lead of leads) {
-    const sourceSummary = [
-      lead.source_channel,
-      lead.utm_source,
-      lead.utm_medium,
-      lead.utm_campaign,
-    ]
-      .filter(Boolean)
-      .join("/");
-    const repeatSummary = lead.repeat_submission
-      ? `repeat #${lead.submission_index}`
-      : "new";
-
-    lines.push(
-      [
-        lead.timestamp,
-        lead.priority.toUpperCase(),
-        lead.name,
-        lead.phone || "no phone",
-        lead.email,
-        lead.market,
-        lead.state,
-        lead.address || "no address",
-        `best time ${formatTimeWindow(lead.best_time_start, lead.best_time_end)}`,
-        `score ${lead.lead_score}`,
-        `route ${lead.routing_lane}`,
-        `follow up ${lead.follow_up_deadline}`,
-        `source ${sourceSummary || "direct"}`,
-        repeatSummary,
-        `phone ${lead.phone_verification_status}`,
-        `webhook ${lead.webhook_delivery_status}`,
-      ].join(" | ")
-    );
+    lines.push(formatLeadNoteLine(lead));
   }
   lines.push("");
   return lines.join("\n");
+}
+
+function formatLeadNoteLine(lead) {
+  const sourceSummary = [
+    lead.source_channel,
+    lead.utm_source,
+    lead.utm_medium,
+    lead.utm_campaign,
+  ]
+    .filter(Boolean)
+    .join("/");
+  const repeatSummary = lead.repeat_submission
+    ? `repeat #${lead.submission_index}`
+    : "new";
+
+  return [
+    lead.timestamp,
+    lead.priority.toUpperCase(),
+    lead.name,
+    lead.phone || "no phone",
+    lead.email,
+    lead.market,
+    lead.state,
+    lead.address || "no address",
+    `best time ${formatTimeWindow(lead.best_time_start, lead.best_time_end)}`,
+    `score ${lead.lead_score}`,
+    `route ${lead.routing_lane}`,
+    `follow up ${lead.follow_up_deadline}`,
+    `source ${sourceSummary || "direct"}`,
+    repeatSummary,
+    `phone ${lead.phone_verification_status}`,
+    `webhook ${lead.webhook_delivery_status}`,
+  ].join(" | ");
 }
 
 function formatTimeWindow(start, end) {
@@ -780,10 +794,57 @@ function formatTimeWindow(start, end) {
 }
 
 async function deliverLeadWebhook(lead) {
-  if (!LEAD_WEBHOOK_URL) {
+  const hasWebhook = Boolean(LEAD_WEBHOOK_URL);
+  const hasTelegram = Boolean(
+    TELEGRAM_FORWARD_TOKEN && TELEGRAM_FORWARD_CHAT_ID
+  );
+
+  if (!hasWebhook && !hasTelegram) {
     return { status: "disabled" };
   }
 
+  const results = [];
+
+  if (hasWebhook) {
+    results.push(await deliverLeadHttpWebhook(lead));
+  }
+
+  if (hasTelegram) {
+    results.push(await deliverLeadTelegram(lead));
+  }
+
+  const failed = results.filter((result) => result.status !== "sent");
+  const responseCodes = results
+    .map((result) => result.responseCode)
+    .filter((code) => Number.isInteger(code));
+  const errors = failed
+    .map((result) => result.error)
+    .filter(Boolean)
+    .join(" | ");
+
+  if (!failed.length) {
+    return {
+      status: "sent",
+      responseCode: responseCodes[0] ?? null,
+    };
+  }
+
+  if (failed.length === results.length) {
+    return {
+      status: "queued",
+      responseCode: responseCodes[0] ?? null,
+      error: errors,
+    };
+  }
+
+  return {
+    status: "partial",
+    responseCode: responseCodes[0] ?? null,
+    error: errors,
+  };
+}
+
+async function deliverLeadHttpWebhook(lead) {
   try {
     const response = await fetch(LEAD_WEBHOOK_URL, {
       method: "POST",
@@ -804,7 +865,7 @@ async function deliverLeadWebhook(lead) {
     if (!response.ok) {
       const body = await response.text().catch(() => "");
       const error = `HTTP ${response.status}${body ? ` ${body.slice(0, 240)}` : ""}`;
-      queueWebhookFailure(lead, error, response.status);
+      queueWebhookFailure(lead, error, response.status, "http_webhook");
       return {
         status: "queued",
         responseCode: response.status,
@@ -818,7 +879,7 @@ async function deliverLeadWebhook(lead) {
     };
   } catch (error) {
     const message = String(error && error.message ? error.message : error);
-    queueWebhookFailure(lead, message, null);
+    queueWebhookFailure(lead, message, null, "http_webhook");
     return {
       status: "queued",
       error: message,
@@ -826,11 +887,54 @@ async function deliverLeadWebhook(lead) {
   }
 }
 
-function queueWebhookFailure(lead, error, responseCode) {
+async function deliverLeadTelegram(lead) {
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_FORWARD_TOKEN}/sendMessage`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        },
+        body: new URLSearchParams({
+          chat_id: TELEGRAM_FORWARD_CHAT_ID,
+          text: formatLeadNoteLine(lead),
+        }),
+        signal: AbortSignal.timeout(TELEGRAM_FORWARD_TIMEOUT_MS),
+      }
+    );
+
+    const body = await response.text().catch(() => "");
+    if (!response.ok || !/"ok"\s*:\s*true/.test(body)) {
+      const error = `HTTP ${response.status}${body ? ` ${body.slice(0, 240)}` : ""}`;
+      queueWebhookFailure(lead, error, response.status, "telegram");
+      return {
+        status: "queued",
+        responseCode: response.status,
+        error,
+      };
+    }
+
+    return {
+      status: "sent",
+      responseCode: response.status,
+    };
+  } catch (error) {
+    const message = String(error && error.message ? error.message : error);
+    queueWebhookFailure(lead, message, null, "telegram");
+    return {
+      status: "queued",
+      error: message,
+    };
+  }
+}
+
+function queueWebhookFailure(lead, error, responseCode, destination = "unknown") {
   fs.appendFileSync(
     WEBHOOK_QUEUE_PATH,
     JSON.stringify({
       queued_at: new Date().toISOString(),
+      destination,
       response_code: responseCode,
       error,
       lead,
