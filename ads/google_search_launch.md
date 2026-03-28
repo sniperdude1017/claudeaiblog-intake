@@ -1,6 +1,6 @@
 # Google Search Launch
 
-Use this campaign first. It is built around the live landing page at `https://claudeaiblog.com/join.html` and should point to the email-first signup flow.
+Use this campaign first. It is built around the live landing page at `https://claudeaiblog.com/join.html` and should point to the phone-required signup flow for active Claude users.
 
 ## Campaign settings
 
@@ -45,6 +45,10 @@ Add these at the campaign level:
 - `support`
 - `customer service`
 - `phone number`
+- `chatgpt`
+- `apk`
+- `student`
+- `prompt generator`
 
 ## Ad group 1
 
@@ -67,26 +71,26 @@ Add these at the campaign level:
 
 ### Responsive search ad headlines
 
-- `Claude Updates By Email`
+- `Claude Release Notes`
+- `Claude Code Updates`
+- `For Active Claude Users`
+- `Claude Updates For Teams`
 - `Source-Backed Claude Brief`
-- `Claude Code Notes Weekly`
-- `Release Notes Without Noise`
-- `Track Claude Launch Notes`
-- `Get Claude Launch Notes`
-- `For Builders Using Claude`
-- `Practical Claude Summary`
-- `Claude Product Changes Fast`
-- `AI Updates Worth Reading`
-- `Skip Generic AI Hype`
-- `Track Claude Releases`
-- `Join The Claude Brief`
+- `Track Claude Changes Fast`
+- `Claude Model Change Alerts`
+- `Claude Projects Updates`
+- `Claude Artifacts Changes`
+- `Skip Generic AI Noise`
+- `Anthropic Claude Updates`
+- `Claude Workflow Changes`
+- `Direct Claude Follow-Up`
 
 ### Descriptions
 
-- `Get source-backed Claude updates, release notes, and Claude Code changes by email.`
-- `Built for people who want signal, not AI noise, from Claude launches and product changes.`
-- `Email-first signup. No address required. Opt in for a faster Claude brief.`
-- `Join for independent Claude coverage and direct links to the original sources.`
+- `Source-backed Claude launch notes, Claude Code updates, and workflow changes.`
+- `Built for teams already using Claude. Name, email, and phone required.`
+- `Skip generic AI roundup posts. Get practical takeaways and direct source links.`
+- `Follow models, Projects, Artifacts, and Claude Code changes worth testing.`
 
 ## Ad group 2
 
@@ -130,10 +134,11 @@ Add these at the campaign level:
 
 ## Callouts
 
-- `Email only signup`
-- `No address required`
-- `Practical AI brief`
-- `No spam`
+- `For Active Claude Users`
+- `Source-Backed`
+- `Claude Code Coverage`
+- `Direct Follow-Up`
+- `Name, Email, Phone`
 
 ## Sitelinks
 
